@@ -20,7 +20,7 @@ export const PAGES_MENU = [
         path: 'admin',  // path for our page
         data: { // custom menu declaration
           menu: {
-            title: 'Admin', // menu title
+            title: 'Administration', // menu title
             icon: 'ion-grid', // menu icon
             pathMatch: 'prefix', // use it if item children not displayed in menu
             selected: false,

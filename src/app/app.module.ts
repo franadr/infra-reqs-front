@@ -19,6 +19,7 @@ import { PagesModule } from './pages/pages.module';
 import {AuthGuard} from "./_guard/auth.guard";
 import {AuthenticationService} from "./_services/authentication.service";
 import {AdminGuard} from "./_guard/admin.guard";
+import {RequestsService} from "./_services/requests.service";
 
 
 // Application wide providers
@@ -27,6 +28,7 @@ const APP_PROVIDERS = [
   GlobalState,
   AuthGuard,
   AuthenticationService,
+  RequestsService,
   AdminGuard
 ];
 

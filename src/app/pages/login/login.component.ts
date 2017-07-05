@@ -10,16 +10,15 @@ import {AuthenticationService} from '../../_services/authentication.service';
   styleUrls: ['./login.scss'],
 })
 export class Login implements OnInit {
-  ngOnInit(): void {
-    this.error = '';
-  }
-
   public form: FormGroup;
   public username: AbstractControl;
   public password: AbstractControl;
+
+
   public submitted = false;
   public error = '';
   public loading = false;
+  public tri: string;
 
   constructor(fb: FormBuilder, private router: Router, private authService: AuthenticationService) {
     this.form = fb.group({
@@ -30,18 +29,19 @@ export class Login implements OnInit {
     this.username = this.form.controls['username'];
     this.password = this.form.controls['password'];
   }
-
-
-
+  ngOnInit(): void {
+    this.error = '';
+  }
   public onSubmit(values: User): void {
     this.loading = true;
     this.submitted = true;
     if (this.form.valid) {
       this.authService.login(values.username, values.password).subscribe(result => {
       if (result === true) {
-        this.router.navigate([''])
+        this.router.navigate(['pages/dashboard2'])
+        this.tri = this.authService.user_ad.trigram;
       } else {
-        this.error = 'Username or password incorect';
+        this.error = 'Username or password incorrect';
         this.loading = false
       }
 

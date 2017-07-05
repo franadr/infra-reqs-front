@@ -19,7 +19,7 @@ export const routes: Routes = [
     path: 'pages',
     component: Pages,
     children: [
-      { path: '', redirectTo: './dashboard2', pathMatch: 'full'},
+      { path: '', redirectTo: 'dashboard2', pathMatch: 'full'},
       { path: 'dashboard2', loadChildren: './dashboard2/dashboard2.module#Dashboard2Module' },
       { path: 'editors', loadChildren: './editors/editors.module#EditorsModule' },
       { path: 'components', loadChildren: './components/components.module#ComponentsModule' },
