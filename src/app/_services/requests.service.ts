@@ -10,7 +10,7 @@ export class RequestsService {
 
 
   postRequest(r: Request): Observable<boolean> {
-    return this.http.post(this.url,JSON.parse(JSON.stringify(r))).map((res: Response) => {
+    return this.http.post(this.url + 'request',JSON.parse(JSON.stringify(r))).map((res: Response) => {
       if (res.status === 200){
         return true;
       } else {

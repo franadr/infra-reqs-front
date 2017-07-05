@@ -10,7 +10,7 @@ import {RequestsService} from '../../_services/requests.service';
 })
 export class RequestsComponent implements OnInit {
   public form: FormGroup;
-  public trigram: AbstractControl;
+  public origin: AbstractControl;
   public content: AbstractControl;
   private error = false;
 
@@ -18,10 +18,10 @@ export class RequestsComponent implements OnInit {
 
   constructor(fb: FormBuilder, private requestService: RequestsService) {
     this.form = fb.group({
-      'trigram' : ['', Validators.required],
+      'origin' : ['', Validators.required],
       'content' : ['', Validators.required],
     });
-    this.trigram = this.form.controls['trigram'];
+    this.origin = this.form.controls['origin'];
     this.content = this.form.controls['content'];
   }
 
@@ -29,7 +29,7 @@ export class RequestsComponent implements OnInit {
   }
 
   onSubmit(req: any){
-    this.requestService.postRequest(req).subscribe((flag: boolean) => this.error = flag)
+    this.requestService.postRequest(req).subscribe((flag: boolean) => this.error = !flag)
   }
 
 }
