@@ -16,10 +16,11 @@ import { AppState, InternalStateType } from './app.service';
 import { GlobalState } from './global.state';
 import { NgaModule } from './theme/nga.module';
 import { PagesModule } from './pages/pages.module';
-import {AuthGuard} from "./_guard/auth.guard";
-import {AuthenticationService} from "./_services/authentication.service";
-import {AdminGuard} from "./_guard/admin.guard";
-import {RequestsService} from "./_services/requests.service";
+import {AuthGuard} from './_guard/auth.guard';
+
+import {AdminGuard} from './_guard/admin.guard';
+import {AuthenticationService} from './_services/authentication.service';
+import {RequestsService} from './_services/requests.service';
 
 
 // Application wide providers
@@ -32,11 +33,11 @@ const APP_PROVIDERS = [
   AdminGuard
 ];
 
-export type StoreType = {
+export interface StoreType {
   state: InternalStateType,
   restoreInputValues: () => void,
   disposeOldHosts: () => void
-};
+}
 
 /**
  * `AppModule` is the main entry point into Angular2's bootstraping process
