@@ -13,12 +13,13 @@ export class RequestsComponent implements OnInit {
   public origin: AbstractControl;
   public content: AbstractControl;
   private error = false;
+  private tri = localStorage.getItem('currentTri');
 
 
 
   constructor(fb: FormBuilder, private requestService: RequestsService) {
     this.form = fb.group({
-      'origin' : ['', Validators.required],
+      'origin' : {value : this.tri, disabled: true},
       'content' : ['', Validators.required],
     });
     this.origin = this.form.controls['origin'];

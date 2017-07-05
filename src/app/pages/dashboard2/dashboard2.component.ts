@@ -11,7 +11,7 @@ export class Dashboard2Component implements OnInit {
   constructor(private authService: AuthenticationService) { }
 
   ngOnInit() {
-    this.connectedUser = this.authService.token.trigram;
+    this.connectedUser = localStorage.getItem('currentTri');
   }
 
 }
