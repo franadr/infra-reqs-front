@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import {Http, Response} from "@angular/http";
-import {Observable} from "rxjs/Observable";
+import {Http, Response} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
+import {ARequest} from '../model/request';
 
 
 @Injectable()
@@ -9,17 +10,17 @@ export class RequestsService {
   constructor(private http: Http) { }
 
 
-  postRequest(r: Request): Observable<boolean> {
-    return this.http.post(this.url + 'request',JSON.parse(JSON.stringify(r))).map((res: Response) => {
-      if (res.status === 200){
+  postRequest(r: ARequest): Observable<boolean> {
+    return this.http.post(this.url + 'request', JSON.parse(JSON.stringify(r))).map((res: Response) => {
+      if (res.status === 200) {
         return true;
       } else {
         return false;
       }
     });
   }
-  getRequests(): Observable<Response> {
-    return this.http.get(this.url + 'request').map((res: Response) => res)
+  getRequests(): Observable<ARequest[]> {
+    return this.http.get(this.url + 'request').map(res => res.json());
   }
 
 }

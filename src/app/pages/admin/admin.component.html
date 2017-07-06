@@ -1,5 +1,9 @@
 <div *ngIf="allowed; else blocked">
-  <strong>Administrator place </strong>
+  <strong>List of requests made</strong>
+
+  <ul>
+    <li *ngFor="let request of listOfRequests">{{request.origin}} : {{request.content}}</li>
+  </ul>
 
 </div>
 

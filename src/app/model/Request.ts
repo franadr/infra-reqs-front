@@ -2,7 +2,7 @@
  * Created by Adriano on 05/07/2017.
  */
 
-export class request{
-  origin : string;
+export class ARequest {
+  origin: string;
   content: string;
 }
