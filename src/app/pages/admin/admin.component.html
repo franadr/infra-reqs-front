@@ -1,11 +1,27 @@
-<div *ngIf="allowed; else blocked">
+<div class="container">
+  <div *ngIf="allowed; else blocked">
   <strong>List of requests made</strong>
 
-  <ul>
-    <li *ngFor="let request of listOfRequests">{{request.origin}} : {{request.content}}</li>
-  </ul>
-
-</div>
+    <div class=" row col ">
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Origin trigram</th>
+            <th>Content</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let request of listOfRequests">
+            <th >{{request.id}}</th>
+            <td>{{request.origin}}</td>
+            <td>{{request.content}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
 <ng-template #blocked> You're not allowed to proceed </ng-template>
 
+</div>

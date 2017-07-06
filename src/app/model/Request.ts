@@ -5,4 +5,5 @@
 export class ARequest {
   origin: string;
   content: string;
+  id: number;
 }
