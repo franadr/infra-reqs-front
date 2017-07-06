@@ -12,7 +12,7 @@ export class RequestsService {
   constructor(private http: Http) {
     const headers = new Headers();
 
-    headers.append('authorization ', localStorage.getItem('currentUser'));
+    headers.append('authorization', localStorage.getItem('currentUser'));
 
     this.options = new RequestOptions({ headers: headers });
   }
