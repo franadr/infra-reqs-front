@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AdminGuard} from '../../_guard/admin.guard';
 
 import {RequestsService} from '../../_services/requests.service';
-import {ARequest} from '../../model/request';
+import {ARequest} from '../../model/Request';
 
 @Component({
   selector: 'admin',

@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import {Http, Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
-import {ARequest} from '../model/request';
+import {ARequest} from '../model/Request';
+
 
 
 @Injectable()
 export class RequestsService {
+
   private url = 'http://infra-reqs-api.intech-lab.com/';
   constructor(private http: Http) { }
 
