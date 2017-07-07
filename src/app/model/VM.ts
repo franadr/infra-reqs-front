@@ -12,10 +12,10 @@ export class VirtualMachine {
   private   vmOrigin: string;        // LDAP
   private   vmAdministrator: string; // LDAP
   private   projectManager: string;   // LDAP
-  private   validity: Date;
+  private   validityDate: Date;
   private   memory: number;
   private   vCPU: number;
-  private   diksSpace: number;
+  private   diskSpace: number;
   private   os: string;
   private   version: string;
   private   backup: boolean;
@@ -26,5 +26,6 @@ export class VirtualMachine {
   private   adaptater: string;
   private   switchVirt: string;
   private   vmRequest: VmRequest;
-  private   others: string;
+  private   othersHard: string;
+  private   othersSoft: string;
 }

@@ -6,7 +6,7 @@
 
   <div class="form-group " >
     <div class="row">
-      <h1> Information generale</h1>
+      <h1> Informations generales</h1>
       <label for="inputoriLDAP" class="col-sm-2 control-label" >Origine de la demande</label>
       <div class="col-sm-10">
         <input [formControl]="vmOrigin" type="text" class="form-control" id="inputoriLDAP" placeholder="LADP"  >
@@ -27,14 +27,14 @@
       <div class="col-sm-10">
         <input [formControl]="vmName" type="text" class="form-control" id="inputvmName" >
       </div>
-      <label for="inputValidity" class="col-sm-2 control-label" >Nom de la VM</label>
+      <label for="inputValidity" class="col-sm-2 control-label" >Durée</label>
       <div class="col-sm-10">
-        <input [formControl]="validity" type="date" class="form-control" id="inputValidity">
+        <input [formControl]="validityDate" type="date" class="form-control" id="inputValidity" >
       </div>
     </div>
 
     <div class="row top-buffer">
-      <h1>Ressource materielles demandées</h1>
+      <h1>Ressources materielles demandées</h1>
         <label for="inputcpu" class="col-sm-2 control-label" >CPU</label>
         <div class="col-sm-10">
           <input [formControl]="vCPU" type="number" class="form-control" id="inputcpu" placeholder="# CPU" >
@@ -45,19 +45,19 @@
         </div>
         <label for="inputdisk" class="col-sm-2 control-label" >Disque system et data</label>
         <div class="col-sm-10">
-          <input [formControl]="disksSpace" type="number" class="form-control" id="inputdisk" placeholder="# Go" >
+          <input [formControl]="diskSpace" type="number" class="form-control" id="inputdisk" placeholder="# Go" >
         </div>
         <label for="inputothers" class="col-sm-2 control-label" >Autres</label>
         <div class="col-sm-10">
-          <input [formControl]="others" type="text" class="form-control" id="inputothers" placeholder="Autres ressources demandées">
+          <input [formControl]="othersHard" type="text" class="form-control" id="inputothers" placeholder="Autres ressources demandées">
         </div>
     </div>
 
     <div class="row top-buffer">
-      <h1>Ressource logicielles demandées</h1>
+      <h1>Ressources logicielles demandées</h1>
       <label for="inputos" class="col-sm-2 control-label" >OS</label>
       <div class="col-sm-10">
-        <input [formControl]="os" type="number" class="form-control" id="inputos" placeholder="" >
+        <input [formControl]="os" type="text" class="form-control" id="inputos" placeholder="" >
       </div>
       <label for="inputos" class="col-sm-2 control-label" >Version</label>
       <div class="col-sm-10">
@@ -73,7 +73,7 @@
       </div>
       <label for="inputothers" class="col-sm-2 control-label" >Autres</label>
       <div class="col-sm-10">
-        <input [formControl]="autres" type="text" class="form-control" id="inputothers" placeholder="Autres ressources demandées" >
+        <input [formControl]="othersSoft" type="text" class="form-control" id="inputothers" placeholder="Autres ressources demandées" >
       </div>
 
     </div>
