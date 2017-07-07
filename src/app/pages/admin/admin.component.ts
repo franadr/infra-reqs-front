@@ -12,11 +12,14 @@ import {ARequest} from '../../model/Request';
 export class AdminComponent implements OnInit {
   private allowed = false;
   listOfRequests: ARequest[] ;
+  private loading = false;
   constructor(private adminGuard: AdminGuard, private requestService: RequestsService) { }
 
   ngOnInit() {
+    this.loading = true;
     this.allowed = this.adminGuard.canActivate();
-    this.requestService.getRequests().subscribe(data => this.listOfRequests = data);
+    this.requestService.getRequests().subscribe(data =>{ this.listOfRequests = data; this.loading = false;});
+
   }
 
 

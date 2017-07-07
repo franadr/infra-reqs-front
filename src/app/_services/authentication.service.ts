@@ -23,6 +23,7 @@ export class AuthenticationService {
          this.token = token;
          localStorage.setItem('currentUser', token.accessToken);
          localStorage.setItem('currentTri', token.trigram);
+         localStorage.setItem('ladp', token.userName);
          console.log('logged in');
          this.getUserInfo(this.token.trigram).subscribe(res => this.user_ad = res );
          console.log(this.user_ad.groups);

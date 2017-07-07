@@ -1,25 +1,30 @@
 <div class="container">
   <div *ngIf="allowed; else blocked">
-  <strong>List of requests made</strong>
 
-    <div class=" row col ">
-      <table class="table table-sm">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Origin trigram</th>
-            <th>Content</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let request of listOfRequests">
-            <th >{{request.id}}</th>
-            <td>{{request.origin}}</td>
-            <td>{{request.content}}</td>
-          </tr>
-        </tbody>
-      </table>
+    <div *ngIf="!loading; else loadIcon">
+      <div class=" row col ">
+        <table class="table table-sm">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Origin trigram</th>
+              <th>Content</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let request of listOfRequests">
+              <th >{{request.id}}</th>
+              <td>{{request.origin}}</td>
+              <td>{{request.content}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
+
+    <ng-template #loadIcon>
+      <img src="http://bestanimations.com/Science/Gears/loadinggears/loading-gears-animation-13-3.gif">
+    </ng-template>
   </div>
 
 <ng-template #blocked> You're not allowed to proceed </ng-template>
