@@ -3,6 +3,7 @@ import { CommonModule }  from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { routing } from './admin.routing';
 import { AdminComponent } from './admin.component';
+import {NgaModule} from '../../theme/nga.module';
 
 
 @NgModule({
@@ -10,6 +11,7 @@ import { AdminComponent } from './admin.component';
     CommonModule,
     FormsModule,
     routing,
+    NgaModule,
 
   ],
   declarations: [

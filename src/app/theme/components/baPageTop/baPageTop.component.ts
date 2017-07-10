@@ -40,7 +40,8 @@ export class BaPageTop implements OnInit {
   }
 
   public toggleLogout(){
-    localStorage.removeItem('currentUser');
+
+    localStorage.clear();
     this.router.navigate(['/login']);
 
 

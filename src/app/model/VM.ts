@@ -6,26 +6,31 @@ import {VmRequest} from './VMrequest';
 
 export class VirtualMachine {
 
-  private   id: number;
-  private   vmName: string;
-  private   projectName: string;
-  private   vmOrigin: string;        // LDAP
-  private   vmAdministrator: string; // LDAP
-  private   projectManager: string;   // LDAP
-  private   validityDate: Date;
-  private   memory: number;
-  private   vCPU: number;
-  private   diskSpace: number;
-  private   os: string;
-  private   version: string;
-  private   backup: boolean;
-  private   monitoring: boolean;
-  private   ip: string;
-  private   Host: string;
-  private   vLan: string;
-  private   adaptater: string;
-  private   switchVirt: string;
-  private   vmRequest: VmRequest;
-  private   othersHard: string;
-  private   othersSoft: string;
+  id: number;
+  vmName: string;
+     projectName: string;
+     vmOrigin: string;        // LDAP
+     vmAdministrator: string; // LDAP
+     projectManager: string;   // LDAP
+     validityDate: Date;
+     memory: number;
+     vCPU: number;
+     diskSpace: number;
+     os: string;
+     version: string;
+     backup: boolean;
+     monitoring: boolean;
+     ip: string;
+     host: string;
+     vLan: string;
+     adaptater: string;
+     switchVirt: string;
+     vMrequestjpa: VmRequest;
+     othersHard: string;
+     othersSoft: string;
+
+     public convertDate(millis: number): Date{
+       const res = new Date(millis);
+       return res;
+     }
 }

@@ -87,7 +87,7 @@ export class RequestsComponent implements OnInit {
 
   onSubmit(req: VirtualMachine) {
   this.requestService.postVMrequest(req).subscribe(res => {
-    this.error = res;
+    this.error = !res;
   })
 }
 

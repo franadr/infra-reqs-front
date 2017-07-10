@@ -41,4 +41,7 @@ export class RequestsService {
       }
     });
   }
+  getVMrequest(filter: string): Observable<VirtualMachine[]> {
+    return this.http.get(this.url + 'vmrequest/' + filter, this.options).map(res => res.json());
+  }
 }
