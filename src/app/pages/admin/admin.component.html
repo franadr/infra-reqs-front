@@ -1,110 +1,165 @@
 
   <div *ngIf="allowed; else blocked">
 
-    <div *ngIf="!loading; else loadIcon">
-     <!-- <div class=" row col-12">
-        <table class="table table-sm">
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>VM name</th>
-              <th>Project name</th>
-              <th>Request origin</th>
-              <th>VM administrator</th>
-              <th>Project manager</th>
-              <th>Validity Date</th>
-              <th>RAM</th>
-              <th># CPU</th>
-              <th>Disk Space</th>
-              <th>Other hard reqs</th>
-              <th>OS</th>
-              <th>OS-version</th>
-              <th>Backup ?</th>
-              <th>Monitoring ?</th>
-              <th>Other soft reqs</th>
-              <th>IP</th>
-              <th>Host</th>
-              <th>vLan</th>
-              <th>Adaptater</th>
-              <th>Switch virt</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let vm of listOfVMRequest">
-              <th >{{vm.id}}</th>
-              <td>{{vm.vmName}}</td>
-              <td>{{vm.projectName}}</td>
-              <td>{{vm.vmOrigin}}</td>
-              <td>{{vm.vmAdministrator}}</td>
-              <td>{{vm.projectManager}}</td>
-              <td>{{vm.validityDate.toLocaleDateString()}}</td>
-              <td>{{vm.memory}}</td>
-              <td>{{vm.vCPU}}</td>
-              <td>{{vm.diskSpace}}</td>
-              <td>{{vm.othersHard}}</td>
-              <td>{{vm.os}}</td>
-              <td>{{vm.version}}</td>
-              <td>{{vm.backup}}</td>
-              <td>{{vm.monitoring}}</td>
-              <td>{{vm.othersSoft}}</td>
-              <td>{{vm.ip}}</td>
-              <td>{{vm.host}}</td>
-              <td>{{vm.vLan}}</td>
-              <td>{{vm.adaptater}}</td>
-              <td>{{vm.switchVirt}}</td>
-              <td>{{vm.vMrequestjpa.status}}</td>
+    <div class="row " *ngIf="!loading; else loadIcon">
+      <div class="col-6 rightLine">
+        <!-- <div class=" row col-12">
+      <table class="table table-sm">
+             <thead>
+               <tr>
+                 <th>Id</th>
+                 <th>VM name</th>
+                 <th>Project name</th>
+                 <th>Request origin</th>
+                 <th>VM administrator</th>
+                 <th>Project manager</th>
+                 <th>Validity Date</th>
+                 <th>RAM</th>
+                 <th># CPU</th>
+                 <th>Disk Space</th>
+                 <th>Other hard reqs</th>
+                 <th>OS</th>
+                 <th>OS-version</th>
+                 <th>Backup ?</th>
+                 <th>Monitoring ?</th>
+                 <th>Other soft reqs</th>
+                 <th>IP</th>
+                 <th>Host</th>
+                 <th>vLan</th>
+                 <th>Adaptater</th>
+                 <th>Switch virt</th>
+                 <th>Status</th>
+               </tr>
+             </thead>
+             <tbody>
+               <tr *ngFor="let vm of listOfVMRequest">
+                 <th >{{vm.id}}</th>
+                 <td>{{vm.vmName}}</td>
+                 <td>{{vm.projectName}}</td>
+                 <td>{{vm.vmOrigin}}</td>
+                 <td>{{vm.vmAdministrator}}</td>
+                 <td>{{vm.projectManager}}</td>
+                 <td>{{vm.validityDate.toLocaleDateString()}}</td>
+                 <td>{{vm.memory}}</td>
+                 <td>{{vm.vCPU}}</td>
+                 <td>{{vm.diskSpace}}</td>
+                 <td>{{vm.othersHard}}</td>
+                 <td>{{vm.os}}</td>
+                 <td>{{vm.version}}</td>
+                 <td>{{vm.backup}}</td>
+                 <td>{{vm.monitoring}}</td>
+                 <td>{{vm.othersSoft}}</td>
+                 <td>{{vm.ip}}</td>
+                 <td>{{vm.host}}</td>
+                 <td>{{vm.vLan}}</td>
+                 <td>{{vm.adaptater}}</td>
+                 <td>{{vm.switchVirt}}</td>
+                 <td>{{vm.vMrequestjpa.status}}</td>
 
 
-            </tr>
-          </tbody>
-        </table>
-            </div>
-              -->
-      <div class="form-group">
-        <label for="filterSelect">Select a status filter</label>
-        <select class="form-control" id="filterSelect" #filter (change)="refresh(filter.value)" >
-          <option selected>all</option>
-          <option>pending</option>
-          <option>other</option>
-        </select>
-      </div>
-
-
-        <div class="row">
-          <div *ngFor="let vm of listOfVMRequest">
-            <div class="col">
-              <div class="card">
-                <div class="card-block">
-                  <div class="card-title">
-                    {{vm.id}} {{vm.vmName}}
-                  </div>
-                  <div class="card-body">
-                    <ul>
-                      <li>
-                        Project name : {{vm.projectName}}
-                      </li>
-                      <li>
-                        Origin : {{vm.vmOrigin}}
-                      </li>
-                      <li>
-                        project Manager : {{vm.projectManager}}
-                      </li>
-                      <li>
-                        Status : {{vm.vMrequestjpa.status}}
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
+               </tr>
+             </tbody>
+           </table>
+               </div>
+                 -->
+        <div class="form-group">
+          <label for="filterSelect">Select a status filter</label>
+          <select class="form-control" id="filterSelect" #filter (change)="refresh(filter.value)" >
+            <option selected>all</option>
+            <option>pending</option>
+            <option>other</option>
+          </select>
         </div>
 
 
+          <div class="row">
+            <div *ngFor="let vm of listOfVMRequest">
+              <div class="col">
+                <div class="card" >
+                  <div class="card-block">
+                    <div class="card-title">
+                      {{vm.id}} {{vm.vmName}}
+                    </div>
+                    <div class="card-body">
+                      <ul>
+                        <li>
+                          Project name : {{vm.projectName}}
+                        </li>
+                        <li>
+                          Origin : {{vm.vmOrigin}}
+                        </li>
+                        <li>
+                          project Manager : {{vm.projectManager}}
+                        </li>
+                        <li>
+                          Status : {{vm.vMrequestjpa.status}}
+                        </li>
+                      </ul>
+
+                    </div>
+                    <div class="row">
+                      <div class="col-2">
+                      <i class="ion-checkmark-round"></i>
+                      </div>
+                      <div class="col-2">
+                      <i class="ion-edit" (click)="selectEdit(vm)"></i>
+                      </div>
+                      <div class="col push-6">
+                        <i class="ion-close-circled" (click)="selectDelete(vm)"></i>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+
 
       </div>
+      <div class="col-6" *ngIf="selectedVMedit">
+        <app-edit-vm [vm]="selectedVMedit" ></app-edit-vm>
+      </div>
+      <div class="col-6" *ngIf="selectedVMdelete">
+        <div clasS="col-6">
+          Delete Request :
+        </div>
+        <div class="row col">
+
+          <div class="card" >
+            <div class="card-block">
+              <div class="card-title">
+                {{selectedVMdelete.id}} {{selectedVMdelete.vmName}}
+              </div>
+              <div class="card-body">
+                <ul>
+                  <li>
+                    Project name : {{selectedVMdelete.projectName}}
+                  </li>
+                  <li>
+                    Origin : {{selectedVMdelete.vmOrigin}}
+                  </li>
+                  <li>
+                    project Manager : {{selectedVMdelete.projectManager}}
+                  </li>
+                  <li>
+                    Status : {{selectedVMdelete.vMrequestjpa.status}}
+                  </li>
+                </ul>
+
+              </div>
+            </div>
+
+
+          </div>
+
+        </div>
+        <button class="btn">Yes</button>
+        <button class="btn">Cancel</button>
+      </div>
+        </div>
 
 
 

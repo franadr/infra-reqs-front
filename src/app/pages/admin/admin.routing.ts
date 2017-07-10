@@ -9,7 +9,7 @@ export const routes: Routes = [
   {
     path: '',
     component: AdminComponent
-  }
+  },
 ];
 
 export const routing = RouterModule.forChild(routes);

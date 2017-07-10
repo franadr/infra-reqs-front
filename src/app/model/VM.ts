@@ -1,4 +1,4 @@
-import {VmRequest} from './VMrequest';
+import{VmRequest} from './VMrequest';
 /**
  * Created by Adriano on 07/07/2017.
  */
@@ -25,7 +25,7 @@ export class VirtualMachine {
      vLan: string;
      adaptater: string;
      switchVirt: string;
-     vMrequestjpa: VmRequest;
+     vMrequestjpa: any;
      othersHard: string;
      othersSoft: string;
 

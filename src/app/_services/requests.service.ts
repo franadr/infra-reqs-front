@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import {Http, RequestOptions, Response, Headers} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {ARequest} from '../model/Request';
-import {VirtualMachine} from "../model/VM";
+import {VirtualMachine} from '../model/VM';
+import {VmRequest} from '../model/VMrequest';
 
 
 
@@ -43,5 +44,17 @@ export class RequestsService {
   }
   getVMrequest(filter: string): Observable<VirtualMachine[]> {
     return this.http.get(this.url + 'vmrequest/' + filter, this.options).map(res => res.json());
+  }
+
+  dummyPost(): Observable<boolean> {
+    const vm: VirtualMachine = new VirtualMachine();
+    const vmreq: VmRequest = new VmRequest();
+    vmreq.status='test';
+    vm.vMrequestjpa = vmreq;
+
+
+
+
+    return this.http.post(this.url + 'vmrequest/' , JSON.parse(JSON.stringify(vm))).map(res => res.json());
   }
 }

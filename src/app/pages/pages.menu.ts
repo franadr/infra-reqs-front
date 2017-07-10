@@ -8,7 +8,7 @@ export const PAGES_MENU = [
         data: { // custom menu declaration
           menu: {
             title: 'Requests', // menu title
-            icon: 'ion-edit', // menu icon
+            icon: 'ion-edit-vmRequest', // menu icon
             pathMatch: 'prefix', // use it if item children not displayed in menu
             selected: false,
             expanded: false,
@@ -34,7 +34,7 @@ export const PAGES_MENU = [
         data: {
           menu: {
             title: 'general.menu.editors',
-            icon: 'ion-edit',
+            icon: 'ion-edit-vmRequest',
             selected: false,
             expanded: false,
             order: 100,

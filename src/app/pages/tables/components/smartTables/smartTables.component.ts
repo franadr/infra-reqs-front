@@ -19,7 +19,7 @@ export class SmartTables {
       cancelButtonContent: '<i class="ion-close"></i>',
     },
     edit: {
-      editButtonContent: '<i class="ion-edit"></i>',
+      editButtonContent: '<i class="ion-edit-vmRequest"></i>',
       saveButtonContent: '<i class="ion-checkmark"></i>',
       cancelButtonContent: '<i class="ion-close"></i>',
     },
