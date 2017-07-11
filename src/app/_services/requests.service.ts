@@ -10,7 +10,8 @@ import {VmRequest} from '../model/VMrequest';
 @Injectable()
 export class RequestsService {
   options: RequestOptions;
-  private url = 'http://infra-reqs-api.intech-lab.com/';
+  //private url = 'http://infra-reqs-api.intech-lab.com/';
+  private url = 'http://localhost:23456/vmrequest/';
   constructor(private http: Http) {
     const headers = new Headers();
 
@@ -34,7 +35,7 @@ export class RequestsService {
   }
 
   postVMrequest(vmrequest: VirtualMachine): Observable<boolean> {
-    return this.http.post(this.url + 'vmrequest', JSON.parse(JSON.stringify(vmrequest)), this.options).map((res: Response) => {
+    return this.http.post(this.url , JSON.parse(JSON.stringify(vmrequest)), this.options).map((res: Response) => {
       if (res.status === 200) {
         return true;
       } else {
@@ -43,7 +44,7 @@ export class RequestsService {
     });
   }
   getVMrequest(filter: string): Observable<VirtualMachine[]> {
-    return this.http.get(this.url + 'vmrequest/' + filter, this.options).map(res => res.json());
+    return this.http.get(this.url + filter, this.options).map(res => res.json());
   }
 
   dummyPost(): Observable<boolean> {
@@ -56,5 +57,9 @@ export class RequestsService {
 
 
     return this.http.post(this.url + 'vmrequest/' , JSON.parse(JSON.stringify(vm))).map(res => res.json());
+  }
+
+  postRequestModification(vm : VirtualMachine): Observable<boolean> {
+    return this.http.post(this.url + 'edit' ,JSON.parse(JSON.stringify(vm)) ,this.options).map(res => res.json());
   }
 }

@@ -19,6 +19,9 @@ export class AdminComponent implements OnInit {
   private selectedVMedit: VirtualMachine;
   private selectedVMdelete: VirtualMachine;
   private selectedVMvalidate: VirtualMachine;
+  private pending = false;
+  private created = false;
+  private archive = false;
   constructor(private adminGuard: AdminGuard, private requestService: RequestsService) { }
 
   ngOnInit() {
@@ -31,6 +34,8 @@ export class AdminComponent implements OnInit {
       this.listOfVMRequest.forEach(vm => vm.validityDate = new Date(vm.validityDate));
 
       this.loading = false});
+
+
 
 
 
@@ -49,17 +54,23 @@ export class AdminComponent implements OnInit {
   }
 
   selectEdit(vm: VirtualMachine): void {
-    console.log(vm.vmName);
+    this.selectedVMedit = null;
     this.selectedVMdelete = null;
     this.selectedVMvalidate = null;
     this.selectedVMedit = vm;
+
   }
   selectDelete(vm: VirtualMachine): void {
     this.selectedVMedit = null;
     this.selectedVMvalidate = null;
-    this.selectedVMdelete = vm;
+    this.selectedVMdelete = null;
   }
 
+  clearEdit() {
+    this.selectedVMedit = null;
+    this.selectedVMvalidate = null;
+    this.selectedVMdelete = null;
+  }
 
 
 }

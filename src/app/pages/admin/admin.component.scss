@@ -3,6 +3,15 @@ tbody {
 
 }
 
+.pendingCard{
+  background-color: #4d88ff;
+}
+.createdCard{
+  background-color: #32cd32;
+}
+.archivedCard{
+  background-color: #ff3333;
+}
 .card:hover {
   background-color: royalblue;
 }

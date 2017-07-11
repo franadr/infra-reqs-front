@@ -1,4 +1,3 @@
-import{VmRequest} from './VMrequest';
 /**
  * Created by Adriano on 07/07/2017.
  */
@@ -29,7 +28,7 @@ export class VirtualMachine {
      othersHard: string;
      othersSoft: string;
 
-     public convertDate(millis: number): Date{
+     public convertDate(millis: number): Date {
        const res = new Date(millis);
        return res;
      }
