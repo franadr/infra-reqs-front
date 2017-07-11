@@ -5,7 +5,6 @@ import { routing } from './admin.routing';
 import { AdminComponent } from './admin.component';
 import {NgaModule} from '../../theme/nga.module';
 import { EditVmComponent } from './edit-vm/edit-vm.component';
-import {DateFormatter} from '@angular/common/src/pipes/intl';
 
 
 @NgModule({
