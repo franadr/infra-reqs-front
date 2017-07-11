@@ -10,8 +10,8 @@ import {VmRequest} from '../model/VMrequest';
 @Injectable()
 export class RequestsService {
   options: RequestOptions;
-  //private url = 'http://infra-reqs-api.intech-lab.com/';
-  private url = 'http://localhost:23456/vmrequest/';
+  private url = 'http://infra-reqs-api.intech-lab.com/';
+  //private url = 'http://localhost:23456/vmrequest/';
   constructor(private http: Http) {
     const headers = new Headers();
 
