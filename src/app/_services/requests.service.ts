@@ -4,14 +4,15 @@ import {Observable} from 'rxjs/Observable';
 import {ARequest} from '../model/Request';
 import {VirtualMachine} from '../model/VM';
 import {VmRequest} from '../model/VMrequest';
+import {environment} from "../../environments/environment";
 
 
 
 @Injectable()
 export class RequestsService {
   options: RequestOptions;
-  private url = 'http://infra-reqs-api.intech-lab.com/vmrequest/';
-  //private url = 'http://localhost:23456/vmrequest/';
+  //private url = 'http://infra-reqs-api.intech-lab.com/vmrequest/';
+  private url = environment.apiUrl;
   constructor(private http: Http) {
     const headers = new Headers();
 
@@ -50,7 +51,7 @@ export class RequestsService {
   dummyPost(): Observable<boolean> {
     const vm: VirtualMachine = new VirtualMachine();
     const vmreq: VmRequest = new VmRequest();
-    vmreq.status='test';
+    vmreq.status = 'test';
     vm.vMrequestjpa = vmreq;
 
 
@@ -60,6 +61,6 @@ export class RequestsService {
   }
 
   postRequestModification(vm : VirtualMachine): Observable<boolean> {
-    return this.http.post(this.url + 'edit' ,JSON.parse(JSON.stringify(vm)) ,this.options).map(res => res.json());
+    return this.http.post(this.url + 'edit' , JSON.parse(JSON.stringify(vm)) , this.options).map(res => res.json());
   }
 }

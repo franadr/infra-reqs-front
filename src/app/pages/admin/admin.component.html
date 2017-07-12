@@ -66,6 +66,7 @@
           <label for="filterSelect">Select a status filter</label>
           <select class="form-control" id="filterSelect" #filter (change)="refresh(filter.value)" >
             <option selected>all</option>
+            <option>toArchive</option>
             <option>pending</option>
             <option>created</option>
             <option>archived</option>
@@ -76,7 +77,11 @@
           <div class="row">
             <div *ngFor="let vm of listOfVMRequest">
               <div class="col" >
-                <div class="card" [ngClass]="{'pendingCard':vm.vMrequestjpa.status == 'pending','createdCard':vm.vMrequestjpa.status == 'created','archivedCard':vm.vMrequestjpa.status == 'archived'}" >
+                <div class="card" [ngClass]="{
+                'pendingCard':vm.vMrequestjpa.status == 'pending',
+                'createdCard':vm.vMrequestjpa.status == 'created',
+                'archivedCard':vm.vMrequestjpa.status == 'archived',
+                'toarchivedCard':vm.vMrequestjpa.status == 'toArchive'}" >
                   <div class="card-block">
                     <div class="card-title">
                       {{vm.vmName}}

@@ -1,0 +1,71 @@
+
+  <div *ngIf="!loading; else loadIcon">
+
+    <div class="row " *ngIf="allowed;else blocked">
+      <div class="col-6 rightLine">
+        <div class="form-group">
+          <label for="filterSelect">Select a status filter</label>
+          <select class="form-control" id="filterSelect" #filter (change)="refresh(filter.value)" >
+            <option selected>all</option>
+            <option>toArchive</option>
+            <option>pending</option>
+            <option>created</option>
+            <option>archived</option>
+          </select>
+        </div>
+
+
+            <table class="table table-bordered table-hover table-responsive">
+              <thead>
+                <tr>
+                  <th (click)="orderTable('id')">#</th>
+                  <th (click)="orderTable('vmName')">VM Name</th>
+                  <th (click)="orderTable('projectName')">Project Name</th>
+                  <th (click)="orderTable('projectManager')">Project Manager</th>
+                  <th (click)="orderTable('vmAdministrator')">VM admin</th>
+                  <th (click)="orderTable('validityDate')">Validity</th>
+                  <th (click)="orderTable('vMrequestjpa.status')">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let vm of listOfVMRequest | orderBy:order " [ngClass]="{
+                'pendingCard':vm.vMrequestjpa.status == 'pending',
+                'createdCard':vm.vMrequestjpa.status == 'created',
+                'archivedCard':vm.vMrequestjpa.status == 'archived',
+                'toarchivedCard':vm.vMrequestjpa.status == 'toArchive'}" (click)="selectEdit(vm)" >
+
+                <td>{{vm.id}}</td>
+                <td>{{vm.vmName}}</td>
+                <td>{{vm.projectName}}</td>
+                <td>{{vm.projectManager}}</td>
+                <td>{{vm.vmAdministrator}}</td>
+                <td>{{vm.validityDate.toLocaleDateString()}}</td>
+                <td>{{vm.vMrequestjpa.status}}</td>
+              </tr>
+              </tbody>
+            </table>
+
+
+
+
+
+
+
+      </div>
+      <div class="col-6" *ngIf="selectedVMedit">
+        <app-edit-vm [vm]="selectedVMedit" ></app-edit-vm>
+        <button class="btn btn-outline-info" (click)="clearEdit()">Cancel</button>
+      </div>
+        </div>
+
+
+
+
+    <ng-template #blocked> You're not allowed to proceed </ng-template>
+  </div>
+  <ng-template #loadIcon>
+    <img src="http://bestanimations.com/Science/Gears/loadinggears/loading-gears-animation-13-3.gif">
+  </ng-template>
+
+
+

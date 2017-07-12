@@ -14,28 +14,28 @@ import {VirtualMachine} from '../../model/VM';
 export class RequestsComponent implements OnInit {
   public    form: FormGroup;
   public    vmName: AbstractControl;
-  private   projectName: AbstractControl;
-  private   vmOrigin: AbstractControl;        // LDAP
-  private   vmAdministrator: AbstractControl; // LDAP
-  private   projectManager: AbstractControl;   // LDAP
-  private   validityDate: AbstractControl;
-  private   memory: AbstractControl;
-  private   vCPU: AbstractControl;
-  private   diskSpace: AbstractControl;
-  private   os: AbstractControl;
-  private   version: AbstractControl;
-  private   backup: AbstractControl;
-  private   monitoring: AbstractControl;
-  private   ip: AbstractControl;
-  private   Host: AbstractControl;
-  private   vLan: AbstractControl;
-  private   adaptater: AbstractControl;
-  private   switchVirt: AbstractControl;
-  private   vmRequest: VmRequest;
+     projectName: AbstractControl;
+     vmOrigin: AbstractControl;        // LDAP
+     vmAdministrator: AbstractControl; // LDAP
+     projectManager: AbstractControl;   // LDAP
+     validityDate: AbstractControl;
+     memory: AbstractControl;
+     vCPU: AbstractControl;
+     diskSpace: AbstractControl;
+     os: AbstractControl;
+     version: AbstractControl;
+     backup: AbstractControl;
+     monitoring: AbstractControl;
+     ip: AbstractControl;
+     Host: AbstractControl;
+     vLan: AbstractControl;
+     adaptater: AbstractControl;
+     switchVirt: AbstractControl;
+     vmRequest: VmRequest;
 
-  private   othersHard: AbstractControl;
-  private   othersSoft: AbstractControl;
-  private   error = null;
+     othersHard: AbstractControl;
+     othersSoft: AbstractControl;
+     error = null;
 
 
 

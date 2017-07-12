@@ -47,6 +47,7 @@ export class EditVmComponent implements OnInit{
   private   othersHard: AbstractControl;
   private   othersSoft: AbstractControl;
   private   error = null;
+     loading = null;
 
   constructor(private fb: FormBuilder, private requestService: RequestsService, private router : Router, private admin: AdminComponent ){}
 
@@ -113,8 +114,9 @@ export class EditVmComponent implements OnInit{
 
   }
 
-  onSubmit(vm: any){
-    let vmToSend : VirtualMachine;
+  onSubmit(vm: any) {
+    this.loading = true;
+    let vmToSend: VirtualMachine;
 
     vmToSend = vm;
     vmToSend.vMrequestjpa = new VmRequest();
@@ -127,10 +129,13 @@ export class EditVmComponent implements OnInit{
         console.log(vmToSend.id + ' succesfully modified');
         this.admin.refresh('all');
       } else {
+        this.error = true;
         console.log(vmToSend.id + ' not modified');
-        this.admin.refresh('all');
       }
-    });
+    },
+    error2 => { console.log(error2); this.error = true ; } );
+
+    this.loading = false;
   }
 
 }

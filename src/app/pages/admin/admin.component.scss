@@ -4,17 +4,48 @@ tbody {
 }
 
 .pendingCard{
-  background-color: #4d88ff;
+  background-color: #99bbff;
 }
+.pendingCard:hover{
+
+
+}
+
+
 .createdCard{
-  background-color: #32cd32;
+  background-color: hsl(120, 45%, 55%);
 }
+.createdCard:hover{
+
+
+}
+
+
 .archivedCard{
-  background-color: #ff3333;
+  background-color: hsl(2, 100%, 65%);
 }
+.archivedCard:hover{
+
+
+}
+
+
 .card:hover {
-  background-color: royalblue;
+  background-color: transparent;
 }
+
+
+.toarchivedCard {
+  background-color: hsl(33, 100%, 55%);
+}
+.toarchivedCard:hover {
+
+
+}
+
+
+
+
 .rightLine {
   border-right: 0.5px solid white;
 

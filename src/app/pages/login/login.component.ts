@@ -18,7 +18,7 @@ export class Login implements OnInit {
   public submitted = false;
   public error = '';
   public loading = false;
-  public tri: string;
+
 
   constructor(fb: FormBuilder, private router: Router, private authService: AuthenticationService) {
     this.form = fb.group({
@@ -38,8 +38,8 @@ export class Login implements OnInit {
     if (this.form.valid) {
       this.authService.login(values.username, values.password).subscribe(result => {
       if (result === true) {
-        this.router.navigate(['pages/dashboard2'])
-        this.tri = this.authService.user_ad.trigram;
+        this.router.navigate(['/pages/dashboard2']);
+
       } else {
         this.error = 'Username or password incorrect';
         this.loading = false

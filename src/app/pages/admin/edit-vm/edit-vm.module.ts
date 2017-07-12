@@ -11,6 +11,6 @@ import {EditVmComponent} from './edit-vm.component';
     FormsModule,
     ReactiveFormsModule,
   ],
-  declarations: [EditVmComponent],
+  declarations: [],
 })
 export class editvmModule { }

@@ -22,6 +22,7 @@ import {AdminGuard} from './_guard/admin.guard';
 import {AuthenticationService} from './_services/authentication.service';
 import {RequestsService} from './_services/requests.service';
 import {CookieModule} from "ngx-cookie";
+import {OrderModule} from "ngx-order-pipe";
 
 
 // Application wide providers
@@ -58,7 +59,8 @@ export interface StoreType {
     NgbModule.forRoot(),
     PagesModule,
     routing,
-    CookieModule.forRoot()
+    CookieModule.forRoot(),
+    OrderModule
   ],
   providers: [ // expose our Services and Providers into Angular's dependency injection
     APP_PROVIDERS

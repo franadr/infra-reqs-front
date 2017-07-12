@@ -5,6 +5,7 @@ import { routing } from './admin.routing';
 import { AdminComponent } from './admin.component';
 import {NgaModule} from '../../theme/nga.module';
 import { EditVmComponent } from './edit-vm/edit-vm.component';
+import {OrderModule} from "ngx-order-pipe";
 
 
 @NgModule({
@@ -14,8 +15,7 @@ import { EditVmComponent } from './edit-vm/edit-vm.component';
     routing,
     NgaModule,
     ReactiveFormsModule,
-
-
+    OrderModule
   ],
   declarations: [
     AdminComponent,
