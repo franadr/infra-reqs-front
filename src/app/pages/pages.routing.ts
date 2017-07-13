@@ -12,22 +12,11 @@ export const routes: Routes = [
     loadChildren: 'app/pages/login/login.module#LoginModule'
   },
   {
-    path: 'register',
-    loadChildren: 'app/pages/register/register.module#RegisterModule'
-  },
-  {
     path: 'pages',
     component: Pages,
     children: [
       { path: '', redirectTo: 'dashboard2', pathMatch: 'full'},
       { path: 'dashboard2', loadChildren: './dashboard2/dashboard2.module#Dashboard2Module' },
-      { path: 'editors', loadChildren: './editors/editors.module#EditorsModule' },
-      { path: 'components', loadChildren: './components/components.module#ComponentsModule' },
-      { path: 'charts', loadChildren: './charts/charts.module#ChartsModule' },
-      { path: 'ui', loadChildren: './ui/ui.module#UiModule' },
-      { path: 'forms', loadChildren: './forms/forms.module#FormsModule' },
-      { path: 'tables', loadChildren: './tables/tables.module#TablesModule' },
-      { path: 'maps', loadChildren: './maps/maps.module#MapsModule' },
       { path: 'admin', loadChildren: './admin/admin.module#AdminModule' },
       { path: 'requests', loadChildren: './requests/requests.module#RequestsModule' },
 

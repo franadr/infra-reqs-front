@@ -8,6 +8,7 @@
     <div class="row">
       <h1> Informations generales</h1>
       <label for="inputoriLDAP" class="col-sm-2 control-label" >Origine de la demande</label>
+
       <div class="col-sm-10">
         <input [formControl]="vmOrigin" type="text" class="form-control" id="inputoriLDAP" placeholder="LADP"  >
       </div>
@@ -37,15 +38,15 @@
       <h1>Ressources materielles demandées</h1>
         <label for="inputcpu" class="col-sm-2 control-label" >CPU</label>
         <div class="col-sm-10">
-          <input [formControl]="vCPU" type="number" class="form-control" id="inputcpu" placeholder="# CPU" >
+          <input [formControl]="vCPU" type="number" class="form-control" id="inputcpu" placeholder="# CPU" min="1" >
         </div>
         <label for="inputmemory" class="col-sm-2 control-label" >RAM</label>
         <div class="col-sm-10">
-          <input [formControl]="memory" type="number" class="form-control" id="inputmemory" placeholder="# Go" >
+          <input [formControl]="memory" type="number" class="form-control" id="inputmemory" placeholder="# Go" min="1" >
         </div>
         <label for="inputdisk" class="col-sm-2 control-label" >Disque system et data</label>
         <div class="col-sm-10">
-          <input [formControl]="diskSpace" type="number" class="form-control" id="inputdisk" placeholder="# Go" >
+          <input [formControl]="diskSpace" type="number" class="form-control" id="inputdisk" placeholder="# Go" min="1" >
         </div>
         <label for="inputothers" class="col-sm-2 control-label" >Autres</label>
         <div class="col-sm-10">
@@ -65,11 +66,11 @@
       </div>
       <label for="inputBackup" class="col-sm-2 control-label" >backup</label>
       <div class="col-sm-10">
-        <input [formControl]="backup" type="text" class="form-control" id="inputBackup" >
+        <input [formControl]="backup" type="text" class="form-control" id="inputBackup" placeholder="true/false" >
       </div>
       <label for="inputMonitoring" class="col-sm-2 control-label" >Monitoring </label>
       <div class="col-sm-10">
-        <input [formControl]="monitoring" type="text" class="form-control" id="inputMonitoring" placeholder="monitoring" >
+        <input [formControl]="monitoring" type="text" class="form-control" id="inputMonitoring" placeholder="true/false" >
       </div>
       <label for="inputothers" class="col-sm-2 control-label" >Autres</label>
       <div class="col-sm-10">
@@ -102,3 +103,17 @@
     </div>
   </div>
 </form>
+<div  *ngIf="!form.controls['vmOrigin'].valid">*Origin de la demande requise</div>
+<div *ngIf="!form.controls['projectName'].valid">*Nom du projet requis</div>
+<div *ngIf="!form.controls['projectManager'].valid">*Project manager requis</div>
+<div *ngIf="!form.controls['vmAdministrator'].valid">*Administrateur VM requis</div>
+<div *ngIf="!form.controls['vmName'].valid">*Nom VM requis superieur a 5 charactères</div>
+<div *ngIf="!form.controls['validityDate'].valid">*Validitée requise</div>
+<div *ngIf="!form.controls['vCPU'].valid">*#CPU requis</div>
+<div *ngIf="!form.controls['memory'].valid">*RAM requise</div>
+<div *ngIf="!form.controls['diskSpace'].valid">*Espace Disque requis</div>
+<div *ngIf="!form.controls['os'].valid">*OS requis</div>
+<div *ngIf="!form.controls['version'].valid">*Version de l'OS requise</div>
+<div *ngIf="!form.controls['backup'].valid">*option backup requise</div>
+<div *ngIf="!form.controls['monitoring'].valid">*option monitoring requise</div>
+

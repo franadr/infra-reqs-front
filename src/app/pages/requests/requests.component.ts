@@ -42,12 +42,12 @@ export class RequestsComponent implements OnInit {
 
   constructor(fb: FormBuilder, private requestService: RequestsService) {
     this.form = fb.group({
-      'vmName' : ['', Validators.required],
+      'vmName' : ['', Validators.compose([Validators.required, Validators.minLength(5)])],
       'projectName' : ['', Validators.required],
-      'vmOrigin' : [localStorage.getItem('ladp')],
-      'vmAdministrator' : ['', Validators.required],
-      'projectManager' : ['', Validators.required],
-      'validityDate' : ['', Validators.required],
+      'vmOrigin' : [localStorage.getItem('ladp'), Validators.compose([Validators.required, Validators.minLength(3)])],
+      'vmAdministrator' : ['', Validators.compose([Validators.required, Validators.minLength(3)])],
+      'projectManager' : ['', Validators.compose([Validators.required, Validators.minLength(3)])],
+      'validityDate' : ['', Validators.compose([Validators.required])],
 
       'vCPU' : ['', Validators.required],
       'memory' : ['', Validators.required],
