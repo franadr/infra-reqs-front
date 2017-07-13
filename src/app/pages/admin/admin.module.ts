@@ -15,7 +15,7 @@ import {OrderModule} from "ngx-order-pipe";
     routing,
     NgaModule,
     ReactiveFormsModule,
-    OrderModule
+    OrderModule,
   ],
   declarations: [
     AdminComponent,

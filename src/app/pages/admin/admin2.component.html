@@ -1,4 +1,4 @@
-
+<div *ngIf="!error; else errorblock">
   <div *ngIf="!loading; else loadIcon">
 
     <div class="row " *ngIf="allowed;else blocked">
@@ -11,11 +11,12 @@
             <option>pending</option>
             <option>created</option>
             <option>archived</option>
+
           </select>
         </div>
 
 
-            <table class="table table-bordered table-hover table-responsive">
+            <table class="table table-bordered table-responsive table-sm">
               <thead>
                 <tr>
                   <th (click)="orderTable('id')">#</th>
@@ -28,19 +29,24 @@
                 </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let vm of listOfVMRequest | orderBy:order " [ngClass]="{
-                'pendingCard':vm.vMrequestjpa.status == 'pending',
-                'createdCard':vm.vMrequestjpa.status == 'created',
-                'archivedCard':vm.vMrequestjpa.status == 'archived',
-                'toarchivedCard':vm.vMrequestjpa.status == 'toArchive'}" (click)="selectEdit(vm)" >
+              <tr *ngFor="let vm of listOfVMRequest | orderBy:order "   >
 
-                <td>{{vm.id}}</td>
+                <td class = "id_td" (click)="selectEdit(vm)">{{vm.id}}</td>
                 <td>{{vm.vmName}}</td>
                 <td>{{vm.projectName}}</td>
                 <td>{{vm.projectManager}}</td>
                 <td>{{vm.vmAdministrator}}</td>
                 <td>{{vm.validityDate.toLocaleDateString()}}</td>
-                <td>{{vm.vMrequestjpa.status}}</td>
+                <td [ngClass]="{
+                'pendingCard':vm.vMrequestjpa.status == 'pending',
+                'createdCard':vm.vMrequestjpa.status == 'created',
+                'archivedCard':vm.vMrequestjpa.status == 'archived',
+                'toarchivedCard':vm.vMrequestjpa.status == 'toArchive'}">{{vm.vMrequestjpa.status}}</td>
+                <td>
+                  <i (click)="updateStatus(vm,'created')" *ngIf="vm.vMrequestjpa.status === 'pending' " class="fa fa-check-square " aria-hidden="true">      </i>
+                  <i (click)="updateStatus(vm,'archived')" *ngIf="vm.vMrequestjpa.status === 'created' || vm.vMrequestjpa.status==='toArchive' " class="fa fa fa-archive "></i>
+                </td>
+
               </tr>
               </tbody>
             </table>
@@ -66,6 +72,11 @@
   <ng-template #loadIcon>
     <img src="http://bestanimations.com/Science/Gears/loadinggears/loading-gears-animation-13-3.gif">
   </ng-template>
+</div>
+
+<ng-template #errorblock>
+  <h2>Server error occured :</h2>
+  {{errorMessage}}</ng-template>
 
 
 

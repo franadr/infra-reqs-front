@@ -7,11 +7,12 @@ import {VirtualMachine} from '../../model/VM';
 
 @Component({
   selector: 'admin',
-  templateUrl: './admin2.component.html',
+  templateUrl: 'admin2.component.html',
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
   private allowed = null;
+  templateURL : string;
   listOfRequests: ARequest[] ;
   listOfVMRequest: VirtualMachine[];
    loading = true;
@@ -22,6 +23,8 @@ export class AdminComponent implements OnInit {
    created = false;
    archive = false;
    order = 'id';
+   error=false;
+   errorMessage:string;
   constructor(private adminGuard: AdminGuard, private requestService: RequestsService) { }
 
   ngOnInit() {
@@ -39,11 +42,34 @@ export class AdminComponent implements OnInit {
       this.listOfVMRequest = data;
       this.listOfVMRequest.forEach(vm => vm.validityDate = new Date(vm.validityDate));
       this.loading = false;
-      this.allowed = true; },
-    error2 => { if (error2.status === 403) {
+      this.allowed = true;
+      this.error=false},
+    error2 => {  {
       this.allowed = false;
       this.loading = false;
+      this.error = true;
+      this.errorMessage = error2 ;
+
+
     } });
+
+  }
+  updateStatus(vm:any , status: string) {
+    vm.vMrequestjpa.status = status;
+    this.requestService.postRequestModification(vm).subscribe(res => {
+      if (res) {
+        console.log(vm.id + ' succesfully modified status');
+        this.refresh('all');
+      } else {
+        this.error = true;
+        console.log(vm.id + ' not modified');
+      }
+    },
+    error2 => {
+      this.error=true;
+      this.errorMessage=error2;
+    });
+    this.refresh('all');
 
   }
 

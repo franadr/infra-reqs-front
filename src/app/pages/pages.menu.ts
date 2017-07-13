@@ -8,7 +8,7 @@ export const PAGES_MENU = [
         data: { // custom menu declaration
           menu: {
             title: 'Requests', // menu title
-            icon: 'ion-edit', // menu icon
+            icon: 'fa fa-plus', // menu icon
             pathMatch: 'prefix', // use it if item children not displayed in menu
             selected: false,
             expanded: false,
