@@ -17,8 +17,6 @@ import {OrderModule} from 'ngx-order-pipe';
     OrderModule,
   ],
   declarations: [
-    AdminComponent,
-    EditVmComponent,
   ]
 })
 export class AdminModule {}
