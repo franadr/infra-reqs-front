@@ -1,0 +1,138 @@
+<div *ngIf="!loading;else loadingtemp">
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
+    <div class="form-group " >
+      <div class="row">
+        <label for="inputid" class="col-sm-2 control-label" >ID</label>
+        <div class="col-sm-10">
+          <input [formControl]="id" type="number" class="form-control" id="inputid" placeholder="LADP" disabled="disabled" >
+        </div>
+        <label for="inputoriLDAP" class="col-sm-2 control-label" >Origine de la demande</label>
+        <div class="col-sm-10">
+          <input [formControl]="vmOrigin" type="text" class="form-control" id="inputoriLDAP" placeholder="LADP"  >
+        </div>
+        <label for="inputprojName" class="col-sm-2 control-label" >Nom du project</label>
+        <div class="col-sm-10">
+          <input [formControl]="projectName" type="text" class="form-control" id="inputprojName"  >
+        </div>
+        <label for="inputprojManager" class="col-sm-2 control-label" >Project manager</label>
+        <div class="col-sm-10">
+          <input [formControl]="projectManager" type="text" class="form-control" id="inputprojManager" placeholder="LADP" >
+        </div>
+        <label for="inputvmAdmin" class="col-sm-2 control-label" >Adminisrateur de la VM</label>
+        <div class="col-sm-10">
+          <input [formControl]="vmAdministrator" type="text" class="form-control" id="inputvmAdmin" placeholder="LADP" >
+        </div>
+        <label for="inputvmName" class="col-sm-2 control-label" >Nom de la VM</label>
+        <div class="col-sm-10">
+          <input [formControl]="vmName" type="text" class="form-control" id="inputvmName" >
+        </div>
+        <label for="inputValidity" class="col-sm-2 control-label" >Durée</label>
+        <div class="col-sm-10">
+          <input [formControl]="validityDate" type="date" class="form-control" id="inputValidity" >
+        </div>
+      </div>
+
+      <div class="row top-buffer">
+
+        <label for="inputcpu" class="col-sm-2 control-label" >CPU</label>
+        <div class="col-sm-10">
+          <input [formControl]="vCPU" type="number" class="form-control" id="inputcpu" placeholder="# CPU" >
+        </div>
+        <label for="inputmemory" class="col-sm-2 control-label" >RAM</label>
+        <div class="col-sm-10">
+          <input [formControl]="memory" type="number" class="form-control" id="inputmemory" placeholder="# Go" >
+        </div>
+        <label for="inputdisk" class="col-sm-2 control-label" >Disque system et data</label>
+        <div class="col-sm-10">
+          <input [formControl]="diskSpace" type="number" class="form-control" id="inputdisk" placeholder="# Go" >
+        </div>
+        <label for="inputothers" class="col-sm-2 control-label" >Autres</label>
+        <div class="col-sm-10">
+          <input [formControl]="othersHard" type="text" class="form-control" id="inputothers" placeholder="Autres ressources demandées">
+        </div>
+      </div>
+
+      <div class="row top-buffer">
+
+        <label for="inputos" class="col-sm-2 control-label" >OS</label>
+        <div class="col-sm-10">
+          <input [formControl]="os" type="text" class="form-control" id="inputos" placeholder="" >
+        </div>
+        <label for="inputos" class="col-sm-2 control-label" >Version</label>
+        <div class="col-sm-10">
+          <input [formControl]="version" type="text" class="form-control" id="inputos" placeholder="OS Version" >
+        </div>
+        <label for="inputBackup" class="col-sm-2 control-label" >backup</label>
+        <div class="col-sm-10">
+          <input [formControl]="backup" type="text" class="form-control" id="inputBackup" >
+        </div>
+        <label for="inputMonitoring" class="col-sm-2 control-label" >Monitoring </label>
+        <div class="col-sm-10">
+          <input [formControl]="monitoring" type="text" class="form-control" id="inputMonitoring" placeholder="monitoring" >
+        </div>
+        <label for="inputothers" class="col-sm-2 control-label" >Autres</label>
+        <div class="col-sm-10">
+          <input [formControl]="othersSoft" type="text" class="form-control" id="inputothers" placeholder="Autres ressources demandées" >
+        </div>
+        <label class="col-sm-2 control-label" for="filterSelect">Status </label>
+        <div class="col-sm-10">
+        <select [formControl]="status" class="form-control" id="filterSelect" >
+          <option selected>{{(vmrequest.vMrequestjpa).status}}</option>
+          <option>created</option>
+          <option>pending</option>
+          <option>toArchive</option>
+          <option>archived</option>
+        </select>
+        </div>
+        <label for="inputvLan" class="col-sm-2 control-label" >Virtual Lan</label>
+        <div class="col-sm-10">
+          <input [formControl]="vLan" type="text" class="form-control" id="inputvLan" placeholder="" >
+        </div>
+        <label for="inputhost" class="col-sm-2 control-label" >Host</label>
+        <div class="col-sm-10">
+          <input [formControl]="host" type="text" class="form-control" id="inputhost" placeholder="" >
+        </div>
+        <label for="inputip" class="col-sm-2 control-label" >IP</label>
+        <div class="col-sm-10">
+          <input [formControl]="ip" type="text" class="form-control" id="inputip" placeholder="" >
+        </div>
+        <label for="inputadaptater" class="col-sm-2 control-label" >Adaptater</label>
+        <div class="col-sm-10">
+          <input [formControl]="adaptater" type="text" class="form-control" id="inputadaptater" placeholder="" >
+        </div>
+        <label for="inputswitchvirt" class="col-sm-2 control-label" >Switch virtuel</label>
+        <div class="col-sm-10">
+          <input [formControl]="switchVirt" type="text" class="form-control" id="inputswitchvirt" placeholder="" >
+        </div>
+
+
+
+      </div>
+    </div>
+
+
+
+    <div class="form-group row">
+
+      <div class="offset-sm-2 ">
+        <button [disabled]="!form.valid " type="submit" class="btn btn-default btn-auth" >Update request</button>
+      </div>
+
+
+
+
+
+
+      <div class="row offset-sm-2 col-sm-10 top-buffer">
+        <a *ngIf="error"> Something wrong append</a>
+      </div>
+      <div class="row offset-sm-2 col-sm-10">
+        <a *ngIf="error === false"> request sent</a>
+      </div>
+    </div>
+  </form>
+</div>
+<ng-template #loadingtemp>
+  Loading
+</ng-template>

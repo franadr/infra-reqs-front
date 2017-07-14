@@ -17,7 +17,7 @@ export const PAGES_MENU = [
         }
       },
       {
-        path: 'admin',  // path for our page
+        path: 'admin',  // path for admin Home page
         data: { // custom menu declaration
           menu: {
             title: 'Administration', // menu title
@@ -27,7 +27,17 @@ export const PAGES_MENU = [
             expanded: false,
             order: 0
           }
-        }
+        },
+        children: [
+          {
+            path: 'vm-admin',
+            data: {
+              menu: {
+                title: 'VM Admin'
+              }
+            }
+          }
+        ]
       },
 
     ]

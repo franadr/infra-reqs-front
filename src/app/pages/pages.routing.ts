@@ -17,7 +17,7 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'dashboard2', pathMatch: 'full'},
       { path: 'dashboard2', loadChildren: './dashboard2/dashboard2.module#Dashboard2Module' },
-      { path: 'admin', loadChildren: './admin/admin.module#AdminModule' },
+      { path: 'admin', loadChildren: './admin-home/admin-home.module#AdminHomeModule' },
       { path: 'requests', loadChildren: './requests/requests.module#RequestsModule' },
 
     ]
