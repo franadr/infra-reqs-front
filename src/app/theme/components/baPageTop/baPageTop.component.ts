@@ -41,7 +41,7 @@ export class BaPageTop implements OnInit {
 
   public toggleLogout(){
 
-    localStorage.clear();
+    this.authService.logout();
     this.router.navigate(['/login']);
 
 

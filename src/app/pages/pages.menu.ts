@@ -14,7 +14,25 @@ export const PAGES_MENU = [
             expanded: false,
             order: 0
           }
-        }
+        },
+        children: [
+          {
+            path: 'new',
+            data: {
+              menu: {
+                title: 'New request'
+              }
+            }
+          },
+          {
+            path: 'modification',
+            data: {
+              menu: {
+                title: 'Modify a request'
+              }
+            }
+          }
+        ]
       },
       {
         path: 'admin',  // path for admin Home page

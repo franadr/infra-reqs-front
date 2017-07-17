@@ -53,7 +53,6 @@ export class EditVmComponent implements OnInit{
 
   initVM(){
     this.vmrequest = this.vm;
-
     this.createForm();
   }
 

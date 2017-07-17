@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {NgaModule} from '../../theme/nga.module';
-import {OrderModule} from 'ngx-order-pipe';
-
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {NgaModule} from "../../theme/nga.module";
+import {OrderModule} from "ngx-order-pipe";
 
 @NgModule({
   imports: [
@@ -11,8 +10,8 @@ import {OrderModule} from 'ngx-order-pipe';
     FormsModule,
     NgaModule,
     ReactiveFormsModule,
-    OrderModule,
+    OrderModule
   ],
   declarations: []
 })
-export class AdminModule {}
+export class RequestModificationModule { }

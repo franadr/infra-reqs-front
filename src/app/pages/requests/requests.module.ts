@@ -12,6 +12,6 @@ import {routing} from './requests.routing';
     routing,
     ReactiveFormsModule,
   ],
-  declarations: [RequestsComponent],
+  declarations: [],
 })
 export class RequestsModule { }

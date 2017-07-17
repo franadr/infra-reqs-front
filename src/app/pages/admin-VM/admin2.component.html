@@ -19,7 +19,7 @@
             <table class="table table-bordered table-responsive table-sm">
               <thead>
                 <tr>
-                  <th (click)="orderTable('id')">#</th>
+                  <th (click)="orderTable('id')" >#</th>
                   <th (click)="orderTable('vmName')">VM Name</th>
                   <th (click)="orderTable('projectName')">Project Name</th>
                   <th (click)="orderTable('projectManager')">Project Manager</th>
@@ -29,7 +29,7 @@
                 </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let vm of listOfVMRequest | orderBy:order "   >
+              <tr *ngFor="let vm of listOfVMRequest | orderBy:order:reverse"   >
 
                 <td class = "id_td" (click)="selectEdit(vm)">{{vm.id}}</td>
                 <td>{{vm.vmName}}</td>

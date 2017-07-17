@@ -23,8 +23,9 @@ export class AdminComponent implements OnInit {
    created = false;
    archive = false;
    order = 'id';
-   error=false;
-   errorMessage:string;
+   error = false;
+   errorMessage: string;
+   reverse = false;
   constructor(private adminGuard: AdminGuard, private requestService: RequestsService) { }
 
   ngOnInit() {
@@ -43,7 +44,7 @@ export class AdminComponent implements OnInit {
       this.listOfVMRequest.forEach(vm => vm.validityDate = new Date(vm.validityDate));
       this.loading = false;
       this.allowed = true;
-      this.error=false},
+      this.error = false},
     error2 => {  {
       this.allowed = false;
       this.loading = false;
@@ -92,6 +93,7 @@ export class AdminComponent implements OnInit {
 
   orderTable(filter: string) {
     this.order = filter;
+    this.reverse = !this.reverse;
   }
 
 

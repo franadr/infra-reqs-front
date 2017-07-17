@@ -7,6 +7,7 @@ import { AppTranslationModule } from '../app.translation.module';
 
 import { Pages } from './pages.component';
 import { Dashboard2Component } from './dashboard2/dashboard2.component';
+import { RequestModificationComponent } from './request-modification/request-modification.component';
 
 
 

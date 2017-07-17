@@ -18,11 +18,13 @@ export class AuthenticationService {
 
    return this.http.post(this.siadUrl+'authentication', JSON.parse(JSON.stringify({username: username, password: password})))
      .map((response: Response) => {
-       const token: Token = response.json() ;
-         localStorage.setItem('currentUser', token.accessToken);
-         localStorage.setItem('currentTri', token.trigram);
-         localStorage.setItem('ladp', token.userName);
-         console.log('logged in');
+       this.token = response.json() ;
+       console.log(localStorage.length);
+         localStorage.clear();
+         localStorage.setItem('currentUser', this.token.accessToken);
+         localStorage.setItem('currentTri', this.token.trigram);
+         localStorage.setItem('ladp', this.token.userName);
+         console.log(username + 'logged in');
          return true;
      });
 
@@ -33,8 +35,17 @@ export class AuthenticationService {
     options.headers = new Headers();
     options.headers.set('authorization', this.token.accessToken);
 
-    return this.http.get(this.siadUrl+'users/by-trigram/' + trigrame, options ).map((res: Response) => res.json())
+    return this.http.get(this.siadUrl + 'users/by-trigram/' + trigrame, options ).map((res: Response) => res.json())
 
+
+  }
+
+  logout() {
+
+    this.token = null;
+    localStorage.removeItem('currentUser');
+    localStorage.removeItem('ladp');
+    localStorage.removeItem('currentTri');
 
   }
 
