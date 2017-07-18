@@ -10,7 +10,7 @@ import {RequestsService} from '../../_services/requests.service';
 export class AdminVMmodificationComponent implements OnInit {
   private vmMod: VirtualMachine[];
   private vm: VirtualMachine[];
-  private error = false;
+  error = false;
   private selectedID = null;
   private formerVM: VirtualMachine = null;
   private modVM: VirtualMachine = null;
