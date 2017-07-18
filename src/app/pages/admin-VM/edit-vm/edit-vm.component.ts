@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, AfterContentInit} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {VirtualMachine} from '../../../model/VM';
 import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {VmRequest} from '../../../model/VMrequest';
@@ -14,12 +14,13 @@ import {AdminComponent} from '../admin.component';
   styleUrls: ['./edit-vm.component.scss']
 })
 
-export class EditVmComponent implements OnInit{
+export class EditVmComponent implements OnInit {
+  @Input() vm: VirtualMachine;
   ngOnInit(): void {
     this.initVM();
   }
 
-  @Input() vm: VirtualMachine;
+
   private   vmrequest : VirtualMachine;
   public    form: FormGroup;
   private   id: AbstractControl;

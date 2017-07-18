@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:23456/vmrequest/',
+  apiUrl: 'http://localhost:23456/',
   siadUrl: 'https://si-ad.intech.lu/',
   allowedGroups: ['collaborators', 'all'],
 

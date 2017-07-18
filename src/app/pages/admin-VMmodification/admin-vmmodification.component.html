@@ -1,0 +1,72 @@
+<div *ngIf="!error; else errorTmp" class="row" >
+
+  <div class="col-6">
+    <table class="table table-bordered table-responsive table-sm">
+      <thead>
+      <tr>
+        <th (click)="orderTable('id')">#</th>
+        <th (click)="orderTable('vmName')">VM Name</th>
+        <th (click)="orderTable('projectName')">Project Name</th>
+        <th (click)="orderTable('projectManager')">Project Manager</th>
+        <th (click)="orderTable('vmAdministrator')">VM admin</th>
+        <th (click)="orderTable('validityDate')">Validity</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let vm of vmMod "   >
+
+        <td class = "id_td" (click)="selectView(vm.id)">{{vm.id}}</td>
+        <td>{{vm.vmName}}</td>
+        <td>{{vm.projectName}}</td>
+        <td>{{vm.projectManager}}</td>
+        <td>{{vm.vmAdministrator}}</td>
+        <td>{{vm.validityDate.toLocaleDateString()}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="selectedID">
+    Modification request for VM id : {{selectedID}}
+    <table class="table table-bordered table-responsive table-sm">
+      <thead>
+      <tr>
+        <th>Property</th>
+        <th>Original request</th>
+        <th>Modification request</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr [ngClass]="{'equal': formerVM.vCPU!==modVM.vCPU}">
+        <td>vCPU</td>
+        <td>{{formerVM.vCPU}}</td>
+        <td>{{modVM.vCPU}}</td>
+      </tr>
+      <tr [ngClass]="{'equal': formerVM.memory!==modVM.memory}">
+        <td>Memory</td>
+        <td>{{formerVM.memory}}</td>
+        <td>{{modVM.memory}}</td>
+      </tr>
+      <tr [ngClass]="{'equal': formerVM.diskSpace!==modVM.diskSpace}">
+        <td>Disk space</td>
+        <td>{{formerVM.diskSpace}}</td>
+        <td>{{modVM.diskSpace}}</td>
+      </tr>
+      <tr [ngClass]="{'equal': formerVM.validityDate.toLocaleDateString()!==modVM.validityDate.toLocaleDateString()}">
+        <td>Validity Date</td>
+        <td>{{formerVM.validityDate.toLocaleDateString()}}</td>
+        <td>{{modVM.validityDate.toLocaleDateString()}}</td>
+      </tr>
+      </tbody>
+
+    </table>
+    <div class="toppadding">
+    <button class="btn btn-primary" (click)="triggerModification(selectedID,true)">Validate</button>
+    <button class="btn btn-danger" (click)="triggerModification(selectedID,false)">Discard</button>
+    </div>
+  </div>
+
+</div>
+
+<ng-template #errorTmp>
+  An error occured
+</ng-template>

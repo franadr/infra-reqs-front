@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {RequestsService} from '../../_services/requests.service';
 import {VirtualMachine} from '../../model/VM';
-import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-request-modification',
@@ -42,7 +42,7 @@ export class RequestModificationComponent implements OnInit {
   errorMessage = '';
   uname = localStorage.getItem('ladp');
   vmrequest: VirtualMachine;
-  constructor(private requestService: RequestsService,private fb: FormBuilder) { }
+  constructor(private requestService: RequestsService, private fb: FormBuilder) { }
 
 
   ngOnInit() {
@@ -56,10 +56,10 @@ export class RequestModificationComponent implements OnInit {
         this.vmList.forEach(vm => vm.validityDate = new Date(vm.validityDate));
       }
     },
-    error2 => {
-      this.error = true;
-      this.errorMessage = error2;
-    });
+      error2 => {
+        if (error2.status === 500) {window.alert(error2 + ' See the server logs' );
+        } else { window.alert(error2); }
+      });
   }
 
   selectEdit(vm: any) {
@@ -67,7 +67,7 @@ export class RequestModificationComponent implements OnInit {
     this.createForm();
   }
 
-  orderTable(filter: string){
+  orderTable(filter: string) {
   }
 
   createForm() {
@@ -90,7 +90,7 @@ export class RequestModificationComponent implements OnInit {
       'backup': [this.vmrequest.backup, Validators.required],
       'monitoring': [this.vmrequest.monitoring, Validators.required],
       'othersSoft': [this.vmrequest.othersSoft],
-      'status': new FormControl({value: this.vmrequest.vMrequestjpa.status, disabled:true}),
+      'status': new FormControl({value: this.vmrequest.vMrequestjpa.status, disabled: true}),
       'ip': [this.vmrequest.ip],
       'host': [this.vmrequest.host],
       'vLan': [this.vmrequest.vLan],
@@ -128,24 +128,17 @@ export class RequestModificationComponent implements OnInit {
       if (res === true) {
         console.log('mod ok id :' + vm.id);
         this.vmrequest = null;
-      }else{
+        window.alert('Modification request has been sent');
+      }else {
         console.log('mod not ok');
       }
     },
-    error2 => console.log(error2))
+      error2 => {
+        if (error2.status === 500) {window.alert(error2 + ' See the server logs' );
+        } else { window.alert(error2); }
+      });
   }
 
-  validateTEST() {
-    this.requestService.validateModification(1).subscribe(res => {
-        if (res === true) {
-          console.log('mod ok');
-        }else{
-          console.log('mod not ok');
-        }
-      },
-      error2 =>{ console.log(error2);
-    this.errorMessage = error2;
-                })
-  }
+
 
 }

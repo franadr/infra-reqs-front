@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {AdminGuard} from '../../_guard/admin.guard';
 
 import {RequestsService} from '../../_services/requests.service';
-import {ARequest} from '../../model/Request';
 import {VirtualMachine} from '../../model/VM';
 
 @Component({
@@ -12,21 +10,17 @@ import {VirtualMachine} from '../../model/VM';
 })
 export class AdminComponent implements OnInit {
   private allowed = null;
-  templateURL : string;
-  listOfRequests: ARequest[] ;
   listOfVMRequest: VirtualMachine[];
    loading = true;
    selectedVMedit: VirtualMachine;
    selectedVMdelete: VirtualMachine;
    selectedVMvalidate: VirtualMachine;
-   pending = false;
-   created = false;
-   archive = false;
-   order = 'id';
+  created = false;
+  order = 'id';
    error = false;
    errorMessage: string;
    reverse = false;
-  constructor(private adminGuard: AdminGuard, private requestService: RequestsService) { }
+  constructor(private requestService: RequestsService) { }
 
   ngOnInit() {
     this.loading = true;
@@ -45,31 +39,33 @@ export class AdminComponent implements OnInit {
       this.loading = false;
       this.allowed = true;
       this.error = false},
-    error2 => {  {
-      this.allowed = false;
-      this.loading = false;
-      this.error = true;
-      this.errorMessage = error2 ;
-
-
-    } });
+      error2 => {
+        if (error2.status === 500) {window.alert(error2 + ' See the server logs' );
+        } else { window.alert(error2); }
+        this.allowed = false;
+        this.loading = false;
+        this.error = true;
+      }
+    );
 
   }
-  updateStatus(vm:any , status: string) {
+  updateStatus(vm: any , status: string) {
     vm.vMrequestjpa.status = status;
-    this.requestService.postRequestModification(vm).subscribe(res => {
-      if (res) {
-        console.log(vm.id + ' succesfully modified status');
-        this.refresh('all');
-      } else {
-        this.error = true;
-        console.log(vm.id + ' not modified');
-      }
-    },
-    error2 => {
-      this.error=true;
-      this.errorMessage=error2;
-    });
+    if (window.confirm('Do you want to update status to ' + status)) {
+      this.requestService.postRequestModification(vm).subscribe(res => {
+        if (res) {
+          console.log(vm.id + ' successfully modified status');
+          this.refresh('all');
+        } else {
+          this.error = true;
+          console.log(vm.id + ' not modified');
+        }
+      },
+        error2 => {
+          if (error2.status === 500) {window.alert(error2 + ' See the server logs' );
+          } else { window.alert(error2); }
+        }); }
+
     this.refresh('all');
 
   }
@@ -79,7 +75,7 @@ export class AdminComponent implements OnInit {
     this.selectedVMedit = vm;
 
   }
-  selectDelete(vm: VirtualMachine): void {
+  selectDelete(): void {
     this.selectedVMedit = null;
     this.selectedVMvalidate = null;
     this.selectedVMdelete = null;

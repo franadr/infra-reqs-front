@@ -8,9 +8,10 @@ import {routing} from './admin-home.routing';
 import {NgModule} from '@angular/core';
 import {AdminHomeComponent} from './admin-home.component';
 import {AdminComponent} from '../admin-VM/admin.component';
-import {AdminModule} from '../admin-VM/admin.module';
+
 import {EditVmComponent} from '../admin-VM/edit-vm/edit-vm.component';
-import {RequestsService} from '../../_services/requests.service';
+
+import {AdminVMmodificationComponent} from '../admin-VMmodification/admin-vmmodification.component';
 
 
 @NgModule({
@@ -25,12 +26,14 @@ import {RequestsService} from '../../_services/requests.service';
   declarations: [
     AdminHomeComponent,
     AdminComponent,
-    EditVmComponent
+    EditVmComponent,
+    AdminVMmodificationComponent
   ],
   exports: [
     AdminComponent,
     AdminHomeComponent,
-    EditVmComponent
+    EditVmComponent,
+    AdminVMmodificationComponent
   ]
 })
 export class AdminHomeModule {}

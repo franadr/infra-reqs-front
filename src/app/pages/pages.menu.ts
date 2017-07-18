@@ -54,6 +54,14 @@ export const PAGES_MENU = [
                 title: 'VM Admin'
               }
             }
+          },
+          {
+            path: 'vm-mod',
+            data: {
+              menu: {
+                title: 'VM modification'
+              }
+            }
           }
         ]
       },
