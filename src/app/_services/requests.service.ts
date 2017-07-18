@@ -63,7 +63,7 @@ export class RequestsService {
     const headers = new Headers();
     headers.append('authorization', localStorage.getItem('currentUser'));
     const options: RequestOptions = new RequestOptions({ headers: headers });
-    return this.http.post('http://localhost:23456/' + 'vmedit/new' , JSON.parse(JSON.stringify(vm)) , options).map(res => res.json());
+    return this.http.post(this.url + 'vmedit/new' , JSON.parse(JSON.stringify(vm)) , options).map(res => res.json());
   }
 
   validateModification(id: any, accept: any): Observable<boolean> {
@@ -73,14 +73,14 @@ export class RequestsService {
     const params: URLSearchParams = new URLSearchParams();
     params.set('accept', accept);
     options.params = params;
-    return this.http.get('http://localhost:23456/' + 'vmedit/' + id, options).map(res => res.json());
+    return this.http.get(this.url + 'vmedit/' + id, options).map(res => res.json());
   }
 
   getModificationRequest(): Observable<VirtualMachine[]> {
     const headers = new Headers();
     headers.append('authorization', localStorage.getItem('currentUser'));
     const options: RequestOptions = new RequestOptions({ headers: headers });
-    return this.http.get('http://localhost:23456/vmedit', options).map(res => res.json());
+    return this.http.get(this.url + 'vmedit/' , options).map(res => res.json());
   }
 
 
