@@ -77,7 +77,7 @@ export class EditVmComponent implements OnInit {
       'backup' : [this.vmrequest.backup, Validators.required],
       'monitoring' : [this.vmrequest.monitoring, Validators.required],
       'othersSoft' : [this.vmrequest.othersSoft],
-      'status': [] ,
+      'status': [this.vmrequest.vMrequestjpa.status, Validators.required] ,
       'ip' : [this.vmrequest.ip],
       'host' : [this.vmrequest.host],
       'vLan' : [this.vmrequest.vLan],

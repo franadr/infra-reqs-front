@@ -7,6 +7,6 @@ export const environment = {
   production: false,
   apiUrl: 'http://localhost:23456/',
   siadUrl: 'https://si-ad.intech.lu/',
-  allowedGroups: ['collaborators', 'all'],
+  allowedGroups: ['collaborators'],
 
 };
