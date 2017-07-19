@@ -1,8 +1,12 @@
 import {Component, OnInit} from '@angular/core';
-import { Routes } from '@angular/router';
+import {Router, Routes} from '@angular/router';
 
 import { BaMenuService } from '../theme';
-import { PAGES_MENU } from './pages.menu';
+import { PAGES_MENU, PAGE_MENU_ADMIN } from './pages.menu';
+import {AuthenticationService} from '../_services/authentication.service';
+import {JwtHelper} from 'angular2-jwt';
+import {User_AD} from '../model/User_AD';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'pages',
@@ -25,13 +29,35 @@ import { PAGES_MENU } from './pages.menu';
     </footer>
     -->
     <ba-back-top position="200"></ba-back-top>
-    `
+  `
 })
-export class Pages implements OnInit{
+export class Pages implements OnInit {
+  jwthelper: JwtHelper = new JwtHelper();
 
-  constructor(private _menuService: BaMenuService, ) {
+  constructor(private _menuService: BaMenuService, private authService: AuthenticationService) {
   }
+
   ngOnInit() {
-    this._menuService.updateMenuByRoutes(<Routes>PAGES_MENU);
+    const token = localStorage.getItem('currentUser');
+    const userad: User_AD = this.jwthelper.decodeToken(token);
+
+
+    let isAdmin = false;
+    if (this.jwthelper.isTokenExpired(token)) {
+      this.authService.logout();
+    }
+      userad.groups.forEach(g => {
+        if (environment.allowedGroups.some(s => s === g)) {
+          isAdmin = true;
+        }
+      });
+
+      if (isAdmin) {
+        this._menuService.updateMenuByRoutes(<Routes>PAGES_MENU);
+      }else {
+        this._menuService.updateMenuByRoutes(<Routes>PAGE_MENU_ADMIN);
+      }
+
+
   }
 }

@@ -69,3 +69,42 @@ export const PAGES_MENU = [
     ]
   },
 ];
+export const PAGE_MENU_ADMIN = [
+  {
+
+  path: 'pages',
+  children: [
+    {
+      path: 'requests',  // path for our page
+      data: { // custom menu declaration
+        menu: {
+          title: 'Requests', // menu title
+          icon: 'fa fa-plus', // menu icon
+          pathMatch: 'prefix', // use it if item children not displayed in menu
+          selected: false,
+          expanded: false,
+          order: 0
+        }
+      },
+      children: [
+        {
+          path: 'new',
+          data: {
+            menu: {
+              title: 'New request'
+            }
+          }
+        },
+        {
+          path: 'modification',
+          data: {
+            menu: {
+              title: 'Modify a request'
+            }
+          }
+        }
+      ]
+    },
+  ]
+},
+];
