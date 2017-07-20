@@ -2,15 +2,17 @@
   <div *ngIf="!loading; else loadIcon">
 
     <div class="row " *ngIf="allowed;else blocked">
-      <div class="col-6 rightLine">
+      <div class="col-7 rightLine">
         <div class="form-group">
           <label for="filterSelect">Select a status filter</label>
           <select class="form-control" id="filterSelect" #filter (change)="refresh(filter.value)" >
-            <option selected>all</option>
-            <option>toArchive</option>
-            <option>pending</option>
-            <option>created</option>
-            <option>archived</option>
+            <option selected value="all">Tous</option>
+            <option value="validated">validée</option>
+            <option value="refused">refusée</option>
+            <option value="toArchive">à archiver</option>
+            <option value="pending" >en attente</option>
+            <option value="created">créée</option>
+            <option value="archived">archivée</option>
 
           </select>
         </div>
@@ -20,11 +22,12 @@
               <thead>
                 <tr>
                   <th (click)="orderTable('id')" >#</th>
-                  <th (click)="orderTable('vmName')">VM Name</th>
-                  <th (click)="orderTable('projectName')">Project Name</th>
+                  <th (click)="orderTable('vmName')">Nom VM</th>
+                  <th (click)="orderTable('projectName')">Nom projet</th>
                   <th (click)="orderTable('projectManager')">Project Manager</th>
-                  <th (click)="orderTable('vmAdministrator')">VM admin</th>
-                  <th (click)="orderTable('validityDate')">Validity</th>
+                  <th (click)="orderTable('vmAdministrator')">Admin VM</th>
+                  <th >Validitée</th>
+                  <th (click)="orderTable('validityDate')">Archivage</th>
                   <th (click)="orderTable('vMrequestjpa.status')">Status</th>
                 </tr>
               </thead>
@@ -36,14 +39,18 @@
                 <td>{{vm.projectName}}</td>
                 <td>{{vm.projectManager}}</td>
                 <td>{{vm.vmAdministrator}}</td>
+                <td>'création vm'</td>
                 <td>{{vm.validityDate.toLocaleDateString()}}</td>
                 <td [ngClass]="{
                 'pendingCard':vm.vMrequestjpa.status == 'pending',
                 'createdCard':vm.vMrequestjpa.status == 'created',
                 'archivedCard':vm.vMrequestjpa.status == 'archived',
                 'toarchivedCard':vm.vMrequestjpa.status == 'toArchive'}">{{vm.vMrequestjpa.status}}</td>
+
                 <td>
-                  <i (click)="updateStatus(vm,'created')" *ngIf="vm.vMrequestjpa.status === 'pending' " class="fa fa-check-square " aria-hidden="true">      </i>
+                  <i (click)="updateStatus(vm,'validated')" *ngIf="vm.vMrequestjpa.status === 'pending' " class="fa fa-check " aria-hidden="true">      </i>
+                  <i (click)="updateStatus(vm,'refused')" *ngIf="vm.vMrequestjpa.status === 'pending' " class="fa fa-ban " aria-hidden="true">      </i>
+                  <i (click)="updateStatus(vm,'created')" *ngIf="vm.vMrequestjpa.status === 'validated' " class="fa fa-plus-square-o" aria-hidden="true">      </i>
                   <i (click)="updateStatus(vm,'archived')" *ngIf="vm.vMrequestjpa.status === 'created' || vm.vMrequestjpa.status==='toArchive' " class="fa fa fa-archive "></i>
                 </td>
 
@@ -58,7 +65,7 @@
 
 
       </div>
-      <div class="col-6" *ngIf="selectedVMedit">
+      <div class="col" *ngIf="selectedVMedit">
         <app-edit-vm [vm]="selectedVMedit" ></app-edit-vm>
         <button class="btn btn-outline-info" (click)="clearEdit()">Cancel</button>
       </div>

@@ -1,14 +1,15 @@
 <div *ngIf="!error; else errortmp" class="row">
-  <div *ngIf="vmList; else noVM" class="col-6">
+  <div *ngIf="vmList; else noVM" class="col-7">
     <table class="table table-bordered table-responsive table-sm">
       <thead>
       <tr>
-        <th (click)="orderTable('id')">#</th>
-        <th (click)="orderTable('vmName')">VM Name</th>
-        <th (click)="orderTable('projectName')">Project Name</th>
+        <th (click)="orderTable('id')" >#</th>
+        <th (click)="orderTable('vmName')">Nom VM</th>
+        <th (click)="orderTable('projectName')">Nom projet</th>
         <th (click)="orderTable('projectManager')">Project Manager</th>
-        <th (click)="orderTable('vmAdministrator')">VM admin</th>
-        <th (click)="orderTable('validityDate')">Validity</th>
+        <th (click)="orderTable('vmAdministrator')">Admin VM</th>
+        <th >Validitée</th>
+        <th (click)="orderTable('validityDate')">Archivage</th>
         <th (click)="orderTable('vMrequestjpa.status')">Status</th>
       </tr>
       </thead>
@@ -20,6 +21,7 @@
         <td>{{vm.projectName}}</td>
         <td>{{vm.projectManager}}</td>
         <td>{{vm.vmAdministrator}}</td>
+        <td>'date création'</td>
         <td>{{vm.validityDate.toLocaleDateString()}}</td>
         <td>{{vm.vMrequestjpa.status}}</td>
 

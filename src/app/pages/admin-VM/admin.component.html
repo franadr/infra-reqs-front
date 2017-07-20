@@ -65,11 +65,11 @@
         <div class="form-group">
           <label for="filterSelect">Select a status filter</label>
           <select class="form-control" id="filterSelect" #filter (change)="refresh(filter.value)" >
-            <option selected>all</option>
-            <option>toArchive</option>
-            <option>pending</option>
-            <option>created</option>
-            <option>archived</option>
+            <option selected value="all">Tous</option>
+            <option value="toArchive">à archiver</option>
+            <option value="pending" >en attente</option>
+            <option value="created">créé</option>
+            <option value="archived">archivé</option>
           </select>
         </div>
 
