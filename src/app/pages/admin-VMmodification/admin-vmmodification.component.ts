@@ -50,19 +50,18 @@ export class AdminVMmodificationComponent implements OnInit {
 
   triggerModification(id, accept) {
     this.requestService.validateModification(id, accept).subscribe(res => {
-      if (res) {
+      if (res.requestResult) {
         if (accept) {
           window.alert('Modification accepted and sent');
         }else {
-          window.alert('Modification discarded');
+          window.alert('Modification discarded ' + res.content);
         }
         this.selectedID = null;
         this.getVMmodRequest();
       }
     },
       error2 => {
-        if (error2.status === 500) {window.alert(error2 + ' See the server logs' );
-        } else { window.alert(error2); }
+        {window.alert(error2.content + ' See the server logs' ); }
       });
   }
 }

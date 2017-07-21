@@ -87,12 +87,12 @@ export class RequestsComponent implements OnInit {
 
   onSubmit(req: VirtualMachine) {
   this.requestService.postVMrequest(req).subscribe(res => {
-    this.error = !res;
-    window.alert('VM request has been sent');
+    this.error = !res.requestResult;
+    window.alert(res.content);
   },
     error2 => {
-    if (error2.status === 500) {window.alert(error2 + ' See the server logs' );
-    } else { window.alert(error2); }
+    {window.alert(error2.content + ' See the server logs' );
+     window.alert(error2); }
 
     });
   this.form.reset();

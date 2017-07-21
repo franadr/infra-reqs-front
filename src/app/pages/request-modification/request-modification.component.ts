@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {RequestsService} from '../../_services/requests.service';
 import {VirtualMachine} from '../../model/VM';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {ResponseMessage} from '../../model/ResponseMessage';
 
 @Component({
   selector: 'app-request-modification',
@@ -125,18 +126,16 @@ export class RequestModificationComponent implements OnInit {
 
   onSubmit(vm: any) {
     this.requestService.postModificationRequest(vm).subscribe(res => {
-      if (res === true) {
+      if ( res.requestResult ) {
         console.log('mod ok id :' + vm.id);
         this.vmrequest = null;
         window.alert('Modification request has been sent');
       }else {
         console.log('mod not ok');
+        window.alert(res.content);
       }
     },
-      error2 => {
-        if (error2.status === 500) {window.alert(error2 + ' See the server logs' );
-        } else { window.alert(error2); }
-      });
+      error2 => window.alert(error2.content));
   }
 
 

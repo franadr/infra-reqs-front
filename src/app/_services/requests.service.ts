@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {VirtualMachine} from '../model/VM';
 import {VmRequest} from '../model/VMrequest';
 import {environment} from '../../environments/environment';
+import {ResponseMessage} from '../model/ResponseMessage';
 
 
 
@@ -15,20 +16,15 @@ export class RequestsService {
   constructor(private http: Http) {
   }
 
-  postVMrequest(vmrequest: VirtualMachine): Observable<boolean> {
+  postVMrequest(vmrequest: VirtualMachine): Observable<ResponseMessage> {
     const headers = new Headers();
 
     headers.append('authorization', localStorage.getItem('currentUser'));
 
     const options: RequestOptions = new RequestOptions({ headers: headers });
 
-    return this.http.post(this.url + 'vmrequest/', JSON.parse(JSON.stringify(vmrequest)), options).map((res: Response) => {
-      if (res.json() === true) {
-        return true;
-      } else {
-        return false;
-      }
-    });
+    return this.http.post(this.url + 'vmrequest/', JSON.parse(JSON.stringify(vmrequest)), options).map(res => res.json())
+      .catch(err => err.getBody().json());
   }
   getVMrequest(filter: string): Observable<VirtualMachine[]> {
     const headers = new Headers();
@@ -40,13 +36,14 @@ export class RequestsService {
   }
 
 
-  postRequestModification(vm: VirtualMachine): Observable<boolean> {
+  postRequestModification(vm: VirtualMachine): Observable<ResponseMessage> {
     const headers = new Headers();
 
     headers.append('authorization', localStorage.getItem('currentUser'));
 
     const options: RequestOptions = new RequestOptions({ headers: headers });
-    return this.http.post(this.url + 'vmrequest/' + 'edit' , JSON.parse(JSON.stringify(vm)) , options).map(res => res.json());
+    return this.http.post(this.url + 'vmrequest/' + 'edit' , JSON.parse(JSON.stringify(vm)) , options).map(res => res.json())
+      .catch(err => err.json());
   }
 
   getRequestByUser(uname: string): Observable<VirtualMachine[]> {
@@ -59,21 +56,23 @@ export class RequestsService {
     return this.http.get(this.url + 'vmrequest/' + 'userrequest', options).map(res => res.json());
 
   }
-  postModificationRequest(vm: any): Observable<boolean> {
+  postModificationRequest(vm: any): Observable<ResponseMessage> {
     const headers = new Headers();
     headers.append('authorization', localStorage.getItem('currentUser'));
     const options: RequestOptions = new RequestOptions({ headers: headers });
-    return this.http.post(this.url + 'vmedit/new' , JSON.parse(JSON.stringify(vm)) , options).map(res => res.json());
+    return this.http.post(this.url + 'vmedit/new' , JSON.parse(JSON.stringify(vm)) , options).map(res => res.json())
+      .catch(err => err.json());
   }
 
-  validateModification(id: any, accept: any): Observable<boolean> {
+  validateModification(id: any, accept: any): Observable<ResponseMessage> {
     const headers = new Headers();
     headers.append('authorization', localStorage.getItem('currentUser'));
     const options: RequestOptions = new RequestOptions({ headers: headers });
     const params: URLSearchParams = new URLSearchParams();
     params.set('accept', accept);
     options.params = params;
-    return this.http.get(this.url + 'vmedit/' + id, options).map(res => res.json());
+    return this.http.get(this.url + 'vmedit/' + id, options).map(res => res.json())
+      .catch(err => err.json());
   }
 
   getModificationRequest(): Observable<VirtualMachine[]> {
