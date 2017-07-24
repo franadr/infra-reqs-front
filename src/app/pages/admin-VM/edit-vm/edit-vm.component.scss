@@ -1,10 +1,11 @@
 .textarea:focus {
-  height: 200px;
-  background: lightblue;
+
 }
 .textarea {
   background: inherit;
   border: lightgrey 1px solid;
+  color: white;
+  height: 10em;
 }
 
 .message_block {

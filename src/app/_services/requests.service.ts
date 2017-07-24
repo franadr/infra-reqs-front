@@ -5,7 +5,8 @@ import {VirtualMachine} from '../model/VM';
 import {VmRequest} from '../model/VMrequest';
 import {environment} from '../../environments/environment';
 import {ResponseMessage} from '../model/ResponseMessage';
-import {ThreadMessage} from "../model/ThreadMessage";
+import {ThreadMessage} from '../model/ThreadMessage';
+import 'rxjs/add/operator/catch';
 
 
 
@@ -83,11 +84,19 @@ export class RequestsService {
     return this.http.get(this.url + 'vmedit/' , options).map(res => res.json());
   }
 
-  getDiscussionThread(vmId:number): Observable<ThreadMessage[]> {
+  getDiscussionThread(vmId: number): Observable<ThreadMessage[]> {
     const headers = new Headers();
     headers.append('authorization', localStorage.getItem('currentUser'));
     const options: RequestOptions = new RequestOptions({ headers: headers });
     return this.http.get(this.url + 'vm_thread/' + vmId , options).map(res => res.json());
+  }
+
+  postThreadMessage(threadMessage: any, vmId: number): Observable<ResponseMessage> {
+    const headers = new Headers();
+    headers.append('authorization', localStorage.getItem('currentUser'));
+    const options: RequestOptions = new RequestOptions({ headers: headers });
+    return this.http.post(this.url + 'vm_thread/' + vmId , JSON.parse(JSON.stringify(threadMessage)) , options).map(res => res.json())
+      .catch(err => err.json());
   }
 
 

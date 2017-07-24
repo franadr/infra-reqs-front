@@ -20,3 +20,37 @@ tbody {
   font-weight: 500;
   line-height: 26.4px;
 }
+
+.textarea:focus {
+
+  color: white;
+}
+.textarea {
+  background: inherit;
+  border: lightgrey 1px solid;
+  color: white;
+  height: 10em;
+}
+
+.message_block {
+  border-bottom: lightblue 0.1em solid;
+  margin-bottom: 2.5em;
+}
+.message_title {
+  font-family: 'Century Gothic', CenturyGothic, AppleGothic, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 100;
+  color: #99bbff;
+  padding-left: 0.25em;
+  margin-bottom: 0.5em;
+  border-bottom: cornflowerblue solid 0.1em;
+
+}
+.message_content {
+
+
+  padding-left: 0.25em;
+}
+

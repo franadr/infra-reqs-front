@@ -22,8 +22,9 @@ export class EditVmComponent implements OnInit {
     this.requestService.getDiscussionThread(this.vm.id).subscribe(res => {
       this.threadMessage = res;
         this.threadMessage.forEach(m => m.date = new Date(m.date));
-      this.vm.validityDate = new Date(this.vm.validityDate);
-    }
+
+    },
+      error2 => {window.alert(error2); this.thread_error = true;}
     );
   }
 
@@ -57,6 +58,7 @@ export class EditVmComponent implements OnInit {
   private   error = null;
             loading = null;
             threadMessage: ThreadMessage[];
+            thread_error=false;
 
   constructor(private fb: FormBuilder, private requestService: RequestsService, private router : Router, private admin: AdminComponent ){}
 
@@ -74,7 +76,7 @@ export class EditVmComponent implements OnInit {
       'vmOrigin' : [this.vmrequest.vmOrigin],
       'vmAdministrator' : [this.vmrequest.vmAdministrator, Validators.required],
       'projectManager' : [this.vmrequest.projectManager, Validators.required],
-      'validityDate' : [this.vmrequest.validityDate.toUTCString(), Validators.required],
+      'validityDate' : [this.parseDateString(this.vmrequest.validityDate), Validators.required],
 
       'vCPU' : [this.vmrequest.vCPU, Validators.required],
       'memory' : [this.vmrequest.memory, Validators.required],
@@ -137,14 +139,57 @@ export class EditVmComponent implements OnInit {
       if (res) {
         console.log(vmToSend.id + ' succesfully modified');
         this.admin.refresh('all');
+        this.thread_error = false;
       } else {
+        this.thread_error = true;
         this.error = true;
         console.log(vmToSend.id + ' not modified');
       }
     },
-    error2 => { console.log(error2); this.error = true ; } );
+    error2 => { console.log(error2); this.thread_error = true; } );
 
     this.loading = false;
+  }
+
+  sendMessage(content: string) {
+    let messageToSend = new ThreadMessage();
+    messageToSend.date = new Date(Date.now());
+    messageToSend.content = content;
+    messageToSend.origin = localStorage.getItem('ladp');
+
+    this.requestService.postThreadMessage(messageToSend,this.vmrequest.id).subscribe(res => {
+      if (res) {
+        console.log('Message sent for vn ' + this.vmrequest.id);
+        window.alert('Message envoyé pour la vm ' + this.vmrequest.id)
+        this.admin.clearEdit();
+      } else {
+        this.error = true;
+        console.log('message non envoyé');
+      }
+    },
+      error2 => window.alert('Erreur :'+error2))
+  }
+
+  parseDateString(date: Date): string {
+
+    let result = '';
+    let resultMonth = '';
+    let resultDay = '';
+    result += this.vmrequest.validityDate.getFullYear() + '-';
+    if (date.getMonth() + 1 < 10){
+      console.log(date.getMonth());
+      resultMonth = '0' + (date.getMonth() + 1);
+    } else {
+      resultMonth = date.getMonth().toString();
+    }
+
+    if (date.getDate() < 10){
+      resultDay = '0' + date.getDate();
+    } else {
+      resultDay = date.getDate().toString();
+    }
+    result += resultMonth + '-' + resultDay;
+    return result;
   }
 
 }

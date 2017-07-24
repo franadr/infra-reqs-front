@@ -28,7 +28,7 @@ export const PAGES_MENU = [
             path: 'modification',
             data: {
               menu: {
-                title: 'Modifier demande'
+                title: 'Modifier VM'
               }
             }
           }
@@ -40,7 +40,7 @@ export const PAGES_MENU = [
           menu: {
             title: 'Administration', // menu title
             icon: 'ion-grid', // menu icon
-            pathMatch: 'prefix', // use it if item children not displayed in menu
+            pathMatch: 'prefix',
             selected: false,
             expanded: false,
             order: 0
@@ -51,7 +51,7 @@ export const PAGES_MENU = [
             path: 'vm-admin',
             data: {
               menu: {
-                title: 'Liste demande'
+                title: 'Liste VM'
               }
             }
           },

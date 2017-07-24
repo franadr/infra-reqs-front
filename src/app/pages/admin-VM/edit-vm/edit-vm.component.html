@@ -134,11 +134,11 @@
       </div>
     </form>
   </div>
-  <div class="col-6">
+  <div *ngIf="!thread_error; else thread_loading" class="col-6">
     <h2>Fil de discussion concernant la VM</h2>
-      <div *ngFor="let message of threadMessage" class="message_block" >
+      <div  *ngFor="let message of threadMessage | orderBy:'date':true " class="message_block" >
         <div class="message_title">
-          From {{message.origin}} the {{message.date}} :
+          De {{message.origin}} le {{message.date.toLocaleString()}} :
         </div>
         <div class="message_content">
           {{message.content}}
@@ -146,17 +146,19 @@
       </div>
     <div >
       Votre message :
-    <textarea class="col-12 textarea" >
-    </textarea>
-      <button class="btn btn-primary">
+    <textarea #messageInput class="col-12 textarea"  ></textarea>
+      <button class="btn btn-primary" (click)="sendMessage(messageInput.value)">
         Envoyer
       </button>
-      <button class="btn btn-info push-6">
+      <button class="btn btn-info push-6" (click)="messageInput.value='' " >
         Annuler
       </button>
     </div>
 
   </div>
+  <ng-template #thread_loading>
+    Impossible de charger le fil de discussion !
+  </ng-template>
 
 
 </div>

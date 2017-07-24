@@ -3,6 +3,7 @@ import {RequestsService} from '../../_services/requests.service';
 import {VirtualMachine} from '../../model/VM';
 import {AbstractControl, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ResponseMessage} from '../../model/ResponseMessage';
+import {ThreadMessage} from '../../model/ThreadMessage';
 
 @Component({
   selector: 'app-request-modification',
@@ -43,6 +44,8 @@ export class RequestModificationComponent implements OnInit {
   errorMessage = '';
   uname = localStorage.getItem('ladp');
   vmrequest: VirtualMachine;
+  threadMessage: ThreadMessage[];
+
   constructor(private requestService: RequestsService, private fb: FormBuilder) { }
 
 
@@ -66,12 +69,17 @@ export class RequestModificationComponent implements OnInit {
   selectEdit(vm: any) {
     this.vmrequest = vm;
     this.createForm();
+    this.requestService.getDiscussionThread(this.vmrequest.id).subscribe(res => {
+      this.threadMessage = res;
+      this.threadMessage.forEach(m => m.date = new Date(m.date));
+    });
   }
 
   orderTable(filter: string) {
   }
 
   createForm() {
+    console.log(this.parseDateString(this.vmrequest.validityDate));
     this.form = this.fb.group({
       'id': [this.vmrequest.id, Validators.required],
       'vmName': [this.vmrequest.vmName, Validators.required],
@@ -79,7 +87,7 @@ export class RequestModificationComponent implements OnInit {
       'vmOrigin': [this.vmrequest.vmOrigin],
       'vmAdministrator': [this.vmrequest.vmAdministrator, Validators.required],
       'projectManager': [this.vmrequest.projectManager, Validators.required],
-      'validityDate': [ Validators.required],
+      'validityDate': [this.parseDateString(this.vmrequest.validityDate), Validators.required],
 
       'vCPU': [this.vmrequest.vCPU, Validators.required],
       'memory': [this.vmrequest.memory, Validators.required],
@@ -126,16 +134,61 @@ export class RequestModificationComponent implements OnInit {
 
   onSubmit(vm: any) {
     this.requestService.postModificationRequest(vm).subscribe(res => {
-      if ( res.requestResult ) {
+      if ( res) {
         console.log('mod ok id :' + vm.id);
         this.vmrequest = null;
-        window.alert('Modification request has been sent');
+        window.alert('La demande de modification a  été envoyée');
       }else {
         console.log('mod not ok');
-        window.alert(res.content);
+        window.alert('La demande n a pas été envoyée');
       }
     },
-      error2 => window.alert(error2.content));
+      error2 => window.alert('La demande n a pas été envoyée :\n' + error2.content));
+  }
+
+  clearEdit(){
+    this.vmrequest = null;
+  }
+
+  sendMessage(content: string) {
+    const messageToSend = new ThreadMessage();
+    messageToSend.date = new Date(Date.now());
+    messageToSend.content = content;
+    messageToSend.origin = localStorage.getItem('ladp');
+
+    this.requestService.postThreadMessage(messageToSend, this.vmrequest.id).subscribe(res => {
+        if (res) {
+          console.log('Message sent for vn ' + this.vmrequest.id);
+          window.alert('Message envoyé pour la vm ' + this.vmrequest.id);
+          this.vmrequest = null;
+        } else {
+          this.error = true;
+          console.log('message non envoyé');
+        }
+      },
+      error2 => window.alert('Erreur :' + error2))
+  }
+
+  parseDateString(date: Date): string {
+
+    let result = '';
+    let resultMonth = '';
+    let resultDay = '';
+    result += this.vmrequest.validityDate.getFullYear() + '-';
+    if (date.getMonth() + 1 < 10){
+      console.log(date.getMonth());
+      resultMonth = '0' + (date.getMonth() + 1);
+    } else {
+      resultMonth = date.getMonth().toString();
+    }
+
+    if (date.getDate() < 10){
+      resultDay = '0' + date.getDate();
+    } else {
+      resultDay = date.getDate().toString();
+    }
+    result += resultMonth + '-' + resultDay;
+    return result;
   }
 
 

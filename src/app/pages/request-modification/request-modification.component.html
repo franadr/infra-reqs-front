@@ -1,6 +1,7 @@
 <div *ngIf="!error; else errortmp" class="row">
-  <div *ngIf="vmList; else noVM" class="col-7">
-    <table class="table table-bordered table-responsive table-sm">
+  <div *ngIf="vmList; else noVM" >
+
+    <table *ngIf="!vmrequest" class="table table-bordered table-responsive table-sm">
       <thead>
       <tr>
         <th (click)="orderTable('id')" >#</th>
@@ -10,6 +11,9 @@
         <th (click)="orderTable('vmAdministrator')">Admin VM</th>
         <th >Validitée</th>
         <th (click)="orderTable('validityDate')">Archivage</th>
+        <th >CPU</th>
+        <th >Ram</th>
+        <th >OS-Version</th>
         <th (click)="orderTable('vMrequestjpa.status')">Status</th>
       </tr>
       </thead>
@@ -22,13 +26,17 @@
         <td>{{vm.vmAdministrator}}</td>
         <td>'date création'</td>
         <td>{{vm.validityDate.toLocaleDateString()}}</td>
+        <td>{{vm.vCPU}}</td>
+        <td>{{vm.memory}}</td>
+        <td>{{vm.os}}-{{vm.version}}</td>
         <td>{{vm.vMrequestjpa.status}}</td>
       </tr>
       </tbody>
     </table>
   </div>
-  <div *ngIf="vmrequest" class="col">
-    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal">
+  <div *ngIf="vmrequest" class="row">
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="form-horizontal col-6">
       <div class="form-group " >
         <div class="row">
           <label for="inputid" class="col-sm-2 control-label" >ID</label>
@@ -90,8 +98,35 @@
           <a *ngIf="error"> Something wrong append</a>
         </div>
       </div>
+
     </form>
+
+    <div class="col-6">
+      <h2>Fil de discussion concernant la VM</h2>
+      <div *ngFor="let message of threadMessage | orderBy:'date':true" class="message_block" >
+        <div class="message_title">
+          De {{message.origin}} le {{message.date.toLocaleString()}} :
+        </div>
+        <div class="message_content">
+          {{message.content}}
+        </div>
+      </div>
+      <div >
+        Votre message :
+        <textarea #messageInput class="col-12 textarea" >
+    </textarea>
+        <button class="btn btn-primary" (click)="sendMessage(messageInput.value)">
+          Envoyer
+        </button>
+        <button class="btn btn-info push-6" (click)="messageInput.value='' ">
+          Annuler
+        </button>
+      </div>
+
+    </div>
+    <button class="btn btn-outline-info" (click)="clearEdit()">Retour</button>
   </div>
+
   <ng-template #noVM>
     Chargement , ou l'utilisateur connécté n'est impliqué dans aucunes VM
   </ng-template>
