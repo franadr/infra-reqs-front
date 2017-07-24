@@ -1,8 +1,7 @@
 <div *ngIf="!error; else errorblock">
   <div *ngIf="!loading; else loadIcon">
-
     <div class="row " *ngIf="allowed;else blocked">
-      <div class="col-7 rightLine">
+      <div *ngIf="!selectedVMedit" >
         <div class="form-group">
           <label for="filterSelect">Select a status filter</label>
           <select class="form-control" id="filterSelect" #filter (change)="refresh(filter.value)" >
@@ -13,11 +12,8 @@
             <option value="pending" >en attente</option>
             <option value="created">créée</option>
             <option value="archived">archivée</option>
-
           </select>
         </div>
-
-
             <table class="table table-bordered table-responsive table-sm">
               <thead>
                 <tr>
@@ -28,12 +24,14 @@
                   <th (click)="orderTable('vmAdministrator')">Admin VM</th>
                   <th >Validitée</th>
                   <th (click)="orderTable('validityDate')">Archivage</th>
+                  <th >CPU</th>
+                  <th >Ram</th>
+                  <th >OS-Version</th>
                   <th (click)="orderTable('vMrequestjpa.status')">Status</th>
                 </tr>
               </thead>
               <tbody>
               <tr *ngFor="let vm of listOfVMRequest | orderBy:order:reverse"   >
-
                 <td class = "id_td" (click)="selectEdit(vm)">{{vm.id}}</td>
                 <td>{{vm.vmName}}</td>
                 <td>{{vm.projectName}}</td>
@@ -41,6 +39,9 @@
                 <td>{{vm.vmAdministrator}}</td>
                 <td>'création vm'</td>
                 <td>{{vm.validityDate.toLocaleDateString()}}</td>
+                <td>{{vm.vCPU}}</td>
+                <td>{{vm.memory}}</td>
+                <td>{{vm.os}}-{{vm.version}}</td>
                 <td [ngClass]="{
                 'pendingCard':vm.vMrequestjpa.status == 'pending',
                 'createdCard':vm.vMrequestjpa.status == 'created',
@@ -53,27 +54,16 @@
                   <i (click)="updateStatus(vm,'created')" *ngIf="vm.vMrequestjpa.status === 'validated' " class="fa fa-plus-square-o" aria-hidden="true">      </i>
                   <i (click)="updateStatus(vm,'archived')" *ngIf="vm.vMrequestjpa.status === 'created' || vm.vMrequestjpa.status==='toArchive' " class="fa fa fa-archive "></i>
                 </td>
-
               </tr>
               </tbody>
             </table>
-
-
-
-
-
-
-
       </div>
       <div class="col" *ngIf="selectedVMedit">
+        <button class="btn btn-outline-info" (click)="clearEdit()">Back</button>
         <app-edit-vm [vm]="selectedVMedit" ></app-edit-vm>
-        <button class="btn btn-outline-info" (click)="clearEdit()">Cancel</button>
+        <button class="btn btn-outline-info" (click)="clearEdit()">Back</button>
       </div>
         </div>
-
-
-
-
     <ng-template #blocked> You're not allowed to proceed </ng-template>
   </div>
   <ng-template #loadIcon>

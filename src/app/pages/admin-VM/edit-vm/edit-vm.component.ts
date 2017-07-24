@@ -5,6 +5,7 @@ import {VmRequest} from '../../../model/VMrequest';
 import {RequestsService} from '../../../_services/requests.service';
 import {Router} from '@angular/router';
 import {AdminComponent} from '../admin.component';
+import {ThreadMessage} from "../../../model/ThreadMessage";
 
 
 
@@ -18,6 +19,12 @@ export class EditVmComponent implements OnInit {
   @Input() vm: VirtualMachine;
   ngOnInit(): void {
     this.initVM();
+    this.requestService.getDiscussionThread(this.vm.id).subscribe(res => {
+      this.threadMessage = res;
+        this.threadMessage.forEach(m => m.date = new Date(m.date));
+      this.vm.validityDate = new Date(this.vm.validityDate);
+    }
+    );
   }
 
 
@@ -48,7 +55,8 @@ export class EditVmComponent implements OnInit {
   private   othersHard: AbstractControl;
   private   othersSoft: AbstractControl;
   private   error = null;
-     loading = null;
+            loading = null;
+            threadMessage: ThreadMessage[];
 
   constructor(private fb: FormBuilder, private requestService: RequestsService, private router : Router, private admin: AdminComponent ){}
 
@@ -56,6 +64,7 @@ export class EditVmComponent implements OnInit {
     this.vmrequest = this.vm;
     this.createForm();
   }
+
 
   createForm() {
     this.form = this.fb.group({
