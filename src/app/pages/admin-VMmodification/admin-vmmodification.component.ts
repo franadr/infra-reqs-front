@@ -78,8 +78,9 @@ export class AdminVMmodificationComponent implements OnInit {
     discardMessage.origin = localStorage.getItem('ladp');
 
     activeModal.result.then((res) => {
-    this.triggerModification(id, false);
-    discardMessage.content = res;
+    if (res) {
+      this.triggerModification(id, false);
+      discardMessage.content = res;
       this.requestService.postThreadMessage(discardMessage, id).subscribe(res => {
           if (res) {
             console.log('Message sent for vm ' + id);
@@ -91,6 +92,7 @@ export class AdminVMmodificationComponent implements OnInit {
         },
         error2 => window.alert('Erreur :'+error2));
       console.log('Discard message sent');
+    }
     });
 
 
