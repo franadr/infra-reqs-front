@@ -1,7 +1,7 @@
 <div class="modal-content">
   <div class="modal-header">
     <h4 class="modal-title">Message de refus</h4>
-    <button class="close" aria-label="Close" (click)="closeModal()">
+    <button class="close" aria-label="Close" (click)="closemodal()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -10,6 +10,6 @@
     <textarea #message class="col"></textarea>
   </div>
   <div class="modal-footer">
-    <button class="btn btn-primary confirm-btn" (click)="closeModal(message.value)">Confirmer</button>
+    <button class="btn btn-primary confirm-btn" (click)="validateMessage(message.value)">Confirmer</button>
   </div>
 </div>

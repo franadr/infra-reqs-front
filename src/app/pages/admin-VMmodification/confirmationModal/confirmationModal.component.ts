@@ -17,12 +17,16 @@ export class ConfirmationModalComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  closeModal(message?: string) {
+  validateMessage(message?: string) {
     if (message) {
       this.activeModal.close(message);
     } else {
       this.activeModal.close();
     }
+  }
+
+  closemodal() {
+    this.activeModal.close();
   }
 
 }
