@@ -82,18 +82,20 @@ export class AdminComponent implements OnInit {
     discardMessage.origin = localStorage.getItem('ladp');
 
     activeModal.result.then((res) => {
-      this.updateStatus(vm, 'refusée');
-      discardMessage.content = res;
-      this.requestService.postThreadMessage(discardMessage, vm.id).subscribe(res => {
-          if (res) {
-            console.log('Message sent for vm ' + vm.id);
-            window.alert('Message envoyé pour la vm ' + vm.id);
-          } else {
-            this.error = true;
-            console.log('message non envoyé');
-          }
-        },
-        error2 => window.alert('Erreur :'+error2));
+      if (res) {
+        this.updateStatus(vm, 'refusée');
+        discardMessage.content = res;
+        this.requestService.postThreadMessage(discardMessage, vm.id).subscribe(res => {
+            if (res) {
+              console.log('Message sent for vm ' + vm.id);
+              window.alert('Message envoyé pour la vm ' + vm.id);
+            } else {
+              this.error = true;
+              console.log('message non envoyé');
+            }
+          },
+          error2 => window.alert('Erreur :'+error2));
+      }
     });
   }
 
