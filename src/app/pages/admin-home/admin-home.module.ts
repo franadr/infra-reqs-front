@@ -12,6 +12,8 @@ import {AdminComponent} from '../admin-VM/admin.component';
 import {EditVmComponent} from '../admin-VM/edit-vm/edit-vm.component';
 
 import {AdminVMmodificationComponent} from '../admin-VMmodification/admin-vmmodification.component';
+import {ConfirmationModalComponent} from '../admin-VMmodification/confirmationModal/confirmationModal.component';
+import {NgbModal, NgbModalModule} from "@ng-bootstrap/ng-bootstrap";
 
 
 @NgModule({
@@ -22,18 +24,23 @@ import {AdminVMmodificationComponent} from '../admin-VMmodification/admin-vmmodi
     NgaModule,
     ReactiveFormsModule,
     OrderModule,
+    NgbModalModule
   ],
   declarations: [
     AdminHomeComponent,
     AdminComponent,
     EditVmComponent,
-    AdminVMmodificationComponent
+    AdminVMmodificationComponent,
+    ConfirmationModalComponent
   ],
   exports: [
     AdminComponent,
     AdminHomeComponent,
     EditVmComponent,
-    AdminVMmodificationComponent
+    AdminVMmodificationComponent,
+  ],
+  entryComponents: [
+    ConfirmationModalComponent
   ]
 })
 export class AdminHomeModule {}

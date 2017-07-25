@@ -78,12 +78,12 @@
           <div class="col-sm-10">
           <select [formControl]="status" class="form-control" id="filterSelect" >
             <option selected>{{(vmrequest.vMrequestjpa).status}}</option>
-            <option>created</option>
-            <option>validated</option>
-            <option>refused</option>
-            <option>pending</option>
-            <option>toArchive</option>
-            <option>archived</option>
+            <option value="created">créée</option>
+            <option value="validated">validée</option>
+            <option value="refused">refusée</option>
+            <option value="pending">en attente</option>
+            <option value="toArchive">à archiver</option>
+            <option value="archived">archivée</option>
           </select>
           </div>
           <label for="inputvLan" class="col-sm-2 control-label" >Virtual Lan</label>

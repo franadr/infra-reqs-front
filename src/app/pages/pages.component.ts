@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router, Routes} from '@angular/router';
 
 import { BaMenuService } from '../theme';
-import { PAGES_MENU, PAGE_MENU_ADMIN } from './pages.menu';
+import { PAGES_MENU, PAGE_MENU_NADMIN } from './pages.menu';
 import {AuthenticationService} from '../_services/authentication.service';
 import {JwtHelper} from 'angular2-jwt';
 import {User_AD} from '../model/User_AD';
@@ -55,7 +55,7 @@ export class Pages implements OnInit {
       if (isAdmin) {
         this._menuService.updateMenuByRoutes(<Routes>PAGES_MENU);
       }else {
-        this._menuService.updateMenuByRoutes(<Routes>PAGE_MENU_ADMIN);
+        this._menuService.updateMenuByRoutes(<Routes>PAGE_MENU_NADMIN);
       }
 
 

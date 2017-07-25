@@ -1,13 +1,13 @@
 
 <div class="container">
   <div class="row">
-    <ba-card class="col-6">
-      <a href="#/pages/admin" >Manage requests</a>
+    <ba-card *ngIf="isAdmin" class="col-6">
+      <a href="#/pages/admin/vm-admin" >Administration</a>
     </ba-card>
 
 
     <ba-card class="col-6">
-      <a href="#/pages/requests" >Post requests</a>
+      <a href="#/pages/requests/new" >Demande</a>
     </ba-card>
 
   </div>

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import {RequestsService} from '../../_services/requests.service';
 import {VirtualMachine} from '../../model/VM';
+import {ConfirmationModalComponent} from "../admin-VMmodification/confirmationModal/confirmationModal.component";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {ThreadMessage} from "../../model/ThreadMessage";
 
 @Component({
   selector: 'admin',
@@ -9,6 +12,7 @@ import {VirtualMachine} from '../../model/VM';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
+
   private allowed = null;
   listOfVMRequest: VirtualMachine[];
    loading = true;
@@ -20,7 +24,7 @@ export class AdminComponent implements OnInit {
    error = false;
    errorMessage: string;
    reverse = false;
-  constructor(private requestService: RequestsService) { }
+  constructor(private requestService: RequestsService, private modalService: NgbModal ) { }
 
   ngOnInit() {
     this.loading = true;
@@ -68,6 +72,29 @@ export class AdminComponent implements OnInit {
 
     this.refresh('all');
 
+  }
+
+  refuseVM(vm:any) {
+    const activeModal = this.modalService.open(ConfirmationModalComponent, {size: 'lg'});
+    activeModal.componentInstance.modalHeader = 'refuse confirmation';
+    const discardMessage = new ThreadMessage();
+    discardMessage.date = new Date(Date.now());
+    discardMessage.origin = localStorage.getItem('ladp');
+
+    activeModal.result.then((res) => {
+      this.updateStatus(vm, 'refusée');
+      discardMessage.content = res;
+      this.requestService.postThreadMessage(discardMessage, vm.id).subscribe(res => {
+          if (res) {
+            console.log('Message sent for vm ' + vm.id);
+            window.alert('Message envoyé pour la vm ' + vm.id);
+          } else {
+            this.error = true;
+            console.log('message non envoyé');
+          }
+        },
+        error2 => window.alert('Erreur :'+error2));
+    });
   }
 
   selectEdit(vm: VirtualMachine): void {

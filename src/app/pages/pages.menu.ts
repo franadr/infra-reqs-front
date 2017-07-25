@@ -69,7 +69,7 @@ export const PAGES_MENU = [
     ]
   },
 ];
-export const PAGE_MENU_ADMIN = [
+export const PAGE_MENU_NADMIN = [
   {
 
   path: 'pages',
@@ -78,7 +78,7 @@ export const PAGE_MENU_ADMIN = [
       path: 'requests',  // path for our page
       data: { // custom menu declaration
         menu: {
-          title: 'Requests', // menu title
+          title: 'Demande', // menu title
           icon: 'fa fa-plus', // menu icon
           pathMatch: 'prefix', // use it if item children not displayed in menu
           selected: false,
@@ -91,7 +91,7 @@ export const PAGE_MENU_ADMIN = [
           path: 'new',
           data: {
             menu: {
-              title: 'New request'
+              title: 'Nouvelle demande'
             }
           }
         },
@@ -99,7 +99,7 @@ export const PAGE_MENU_ADMIN = [
           path: 'modification',
           data: {
             menu: {
-              title: 'Modify a request'
+              title: 'Modifier VM'
             }
           }
         }

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {VirtualMachine} from '../../model/VM';
 import {RequestsService} from '../../_services/requests.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ConfirmationModalComponent} from './confirmationModal/confirmationModal.component';
+import {ThreadMessage} from '../../model/ThreadMessage';
 
 @Component({
   selector: 'app-admin-vmmodification',
@@ -14,7 +17,7 @@ export class AdminVMmodificationComponent implements OnInit {
   private selectedID = null;
   private formerVM: VirtualMachine = null;
   private modVM: VirtualMachine = null;
-  constructor(private requestService: RequestsService) { }
+  constructor(private requestService: RequestsService, private modalService: NgbModal) { }
 
   ngOnInit() {
     this.getVMmodRequest();
@@ -49,19 +52,47 @@ export class AdminVMmodificationComponent implements OnInit {
   }
 
   triggerModification(id, accept) {
-    this.requestService.validateModification(id, accept).subscribe(res => {
-      if (res.requestResult) {
-        if (accept) {
-          window.alert('Modification accepted and sent');
-        }else {
-          window.alert('Modification discarded ' + res.content);
-        }
-        this.selectedID = null;
-        this.getVMmodRequest();
-      }
-    },
-      error2 => {
-        {window.alert(error2.content + ' See the server logs' ); }
-      });
+
+
+      this.requestService.validateModification(id, accept).subscribe(res => {
+          if (res.requestResult) {
+            if (accept) {
+              window.alert('Modification accepted and sent');
+            }else {
+              window.alert('Modification discarded ' + res.content);
+            }
+            this.selectedID = null;
+            this.getVMmodRequest();
+          }
+        },
+        error2 => {
+          {window.alert(error2.content + ' See the server logs' ); }
+        });
+  }
+
+  messageConfirmationShow(id: any) {
+    const activeModal = this.modalService.open(ConfirmationModalComponent, {size: 'lg'});
+    activeModal.componentInstance.modalHeader = 'discard confirmation';
+    const discardMessage = new ThreadMessage();
+    discardMessage.date = new Date(Date.now());
+    discardMessage.origin = localStorage.getItem('ladp');
+
+    activeModal.result.then((res) => {
+    this.triggerModification(id, false);
+    discardMessage.content = res;
+      this.requestService.postThreadMessage(discardMessage, id).subscribe(res => {
+          if (res) {
+            console.log('Message sent for vm ' + id);
+            window.alert('Message envoyé pour la vm ' + id);
+          } else {
+            this.error = true;
+            console.log('message non envoyé');
+          }
+        },
+        error2 => window.alert('Erreur :'+error2));
+      console.log('Discard message sent');
+    });
+
+
   }
 }

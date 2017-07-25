@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgaModule} from '../../theme/nga.module';
 import {OrderModule} from 'ngx-order-pipe';
+import {NgbModalModule} from "@ng-bootstrap/ng-bootstrap";
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import {OrderModule} from 'ngx-order-pipe';
     NgaModule,
     ReactiveFormsModule,
     OrderModule,
+
   ],
   declarations: []
 })
