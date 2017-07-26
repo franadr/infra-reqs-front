@@ -125,6 +125,11 @@ export class EditVmComponent implements OnInit {
 
   }
 
+  textEmpty = true;
+  isEmpty(text: string){
+    this.textEmpty =  text.length < 1;
+
+  }
   onSubmit(vm: any) {
     this.loading = true;
     let vmToSend: VirtualMachine;

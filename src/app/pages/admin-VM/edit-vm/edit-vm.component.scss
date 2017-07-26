@@ -1,4 +1,9 @@
 .textarea:focus {
+    background: inherit;
+    border: inherit;
+    color: white;
+    height: 10em;
+    border-radius: 12px;
 
 }
 .textarea {
@@ -6,6 +11,7 @@
   border: lightgrey 1px solid;
   color: white;
   height: 10em;
+  border-radius: 12px;
 }
 
 .message_block {

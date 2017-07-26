@@ -63,7 +63,7 @@
           <div class="col-sm-10">
             <input [formControl]="vmName" type="text" class="form-control" id="inputvmName"disabled="disabled" >
           </div>
-          <label for="inputValidity" class="col-sm-2 control-label" >Validité: {{vmrequest.validityDate.toLocaleDateString()}}</label>
+          <label for="inputValidity" class="col-sm-2 control-label" >Validité</label>
           <div class="col-sm-10">
             <input [formControl]="validityDate" type="date" class="form-control" id="inputValidity" >
           </div>
@@ -113,9 +113,8 @@
       </div>
       <div >
         Votre message :
-        <textarea #messageInput class="col-12 textarea" >
-    </textarea>
-        <button class="btn btn-primary" (click)="sendMessage(messageInput.value)">
+        <textarea #messageInput class="col-12 textarea" (mouseleave)="isEmpty(messageInput.value)" ></textarea>
+        <button [disabled]="textEmpty" class="btn btn-primary" (click)="sendMessage(messageInput.value)" >
           Envoyer
         </button>
         <button class="btn btn-info push-6" (click)="messageInput.value='' ">

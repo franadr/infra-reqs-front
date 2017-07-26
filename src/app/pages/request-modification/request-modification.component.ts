@@ -51,6 +51,7 @@ export class RequestModificationComponent implements OnInit {
 
   ngOnInit() {
     this.refresh();
+    $('sendBtn').prop('disabled', true);
   }
 
   refresh() {
@@ -131,11 +132,17 @@ export class RequestModificationComponent implements OnInit {
     this.switchVirt = this.form.controls['switchVirt'];
     this.vLan = this.form.controls['vLan'];
   }
+  textEmpty = true;
+  isEmpty(text: string){
+    this.textEmpty =  text.length < 1;
 
+  }
   onSubmit(vm: any) {
-    this.requestService.postModificationRequest(vm).subscribe(res => {
+    let modVM = new VirtualMachine();
+    modVM = vm;
+    this.requestService.postModificationRequest(modVM).subscribe(res => {
       if ( res) {
-        console.log('mod ok id :' + vm.id);
+        console.log('mod ok id :' + modVM.id);
         this.vmrequest = null;
         window.alert('La demande de modification a  été envoyée');
       }else {

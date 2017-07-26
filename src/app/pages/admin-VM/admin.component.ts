@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 import {RequestsService} from '../../_services/requests.service';
 import {VirtualMachine} from '../../model/VM';
-import {ConfirmationModalComponent} from "../admin-VMmodification/confirmationModal/confirmationModal.component";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {ThreadMessage} from "../../model/ThreadMessage";
+import {ConfirmationModalComponent} from '../admin-VMmodification/confirmationModal/confirmationModal.component';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {ThreadMessage} from '../../model/ThreadMessage';
+import {HttpRequest} from 'selenium-webdriver/http';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'admin',
@@ -74,18 +76,18 @@ export class AdminComponent implements OnInit {
 
   }
 
-  refuseVM(vm:any) {
+  refuseVM(vm: any) {
     const activeModal = this.modalService.open(ConfirmationModalComponent, {size: 'lg'});
     activeModal.componentInstance.modalHeader = 'refuse confirmation';
     const discardMessage = new ThreadMessage();
     discardMessage.date = new Date(Date.now());
     discardMessage.origin = localStorage.getItem('ladp');
-
     activeModal.result.then((res) => {
       if (res) {
-        this.updateStatus(vm, 'refusée');
+        this.updateStatus(vm, 'refused');
         discardMessage.content = res;
         this.requestService.postThreadMessage(discardMessage, vm.id).subscribe(res => {
+
             if (res) {
               console.log('Message sent for vm ' + vm.id);
               window.alert('Message envoyé pour la vm ' + vm.id);
@@ -94,7 +96,7 @@ export class AdminComponent implements OnInit {
               console.log('message non envoyé');
             }
           },
-          error2 => window.alert('Erreur :'+error2));
+          error2 => window.alert('Erreur :' + error2));
       }
     });
   }
