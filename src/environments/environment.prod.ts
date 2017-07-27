@@ -1,8 +1,8 @@
 export const environment = {
   production: true,
 
-  apiUrl: 'http://infra-reqs-api.intech-lab.com/',
+  apiUrl: '@BACKEND_URL@',
 
-  siadUrl: 'https://si-ad.intech.lu/',
+  siadUrl: '@SI_AD_URL@',
   allowedGroups: ['collaborators', 'all'],
 };
